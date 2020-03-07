@@ -37,30 +37,30 @@ public class RobotContainer {
 
   private final DriveTrainCommand driveTrainCommand = new DriveTrainCommand();
 
-  private static final Joystick driverJoystick = new Joystick(0);
-  private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, 1);
-  private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, 2);
-  private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, 3);
-  private final JoystickButton driverButtonY = new JoystickButton(driverJoystick, 4);
-  private final JoystickButton driverButtonLB = new JoystickButton(driverJoystick, 5);
-  private final JoystickButton driverButtonRB = new JoystickButton(driverJoystick, 6);
-  private final JoystickButton driverButtonBack = new JoystickButton(driverJoystick, 7);
-  private final JoystickButton driverButtonStart = new JoystickButton(driverJoystick, 8);
-  private final JoystickButton driverButtonLeftJoyClick = new JoystickButton(driverJoystick, 9);
-  private final JoystickButton driverButtonRightJoyClick = new JoystickButton(driverJoystick, 10);
+  private final Joystick driverJoystick = new Joystick(0);
+  private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, Constants.driverButtonA);
+  private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, Constants.driverButtonB);
+  private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, Constants.driverButtonX);
+  private final JoystickButton driverButtonY = new JoystickButton(driverJoystick, Constants.driverButtonY);
+  private final JoystickButton driverButtonLB = new JoystickButton(driverJoystick, Constants.driverButtonLB);
+  private final JoystickButton driverButtonRB = new JoystickButton(driverJoystick, Constants.driverButtonRB);
+  private final JoystickButton driverButtonBack = new JoystickButton(driverJoystick, Constants.driverButtonBack);
+  private final JoystickButton driverButtonStart = new JoystickButton(driverJoystick, Constants.driverButtonStart);
+  private final JoystickButton driverButtonLeftJoyClick = new JoystickButton(driverJoystick, Constants.driverButtonLeftJoyClick);
+  private final JoystickButton driverButtonRightJoyClick = new JoystickButton(driverJoystick, Constants.driverButtonRightJoyClick);
 
   private final Joystick operatorJoystick = new Joystick(1);
-  private final JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, 1);
-  private final JoystickButton operatorButtonB = new JoystickButton(operatorJoystick, 2);
-  private final JoystickButton operatorButtonX = new JoystickButton(operatorJoystick, 3);
-  private final JoystickButton operatorButtonY = new JoystickButton(operatorJoystick, 4);
-  private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, 5);
-  private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, 6);
-  private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, 7);
-  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick, 8);
-  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, 9);
-  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, 10);
-  //TODO: make a port
+  private final JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
+  private final JoystickButton operatorButtonB = new JoystickButton(operatorJoystick, Constants.operatorButtonB);
+  private final JoystickButton operatorButtonX = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
+  private final JoystickButton operatorButtonY = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
+  private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
+  private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
+  private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
+  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
+  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonLeftJoyClick);
+  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonRightJoyClick);
+//TODO: make a port
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

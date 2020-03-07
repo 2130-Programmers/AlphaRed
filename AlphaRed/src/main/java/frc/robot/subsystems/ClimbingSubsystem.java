@@ -21,7 +21,7 @@ public class ClimbingSubsystem extends SubsystemBase {
   public ClimbingSubsystem() {
 
     climbingMotor = new TalonSRX(9);
-    climbingSol = new Solenoid(4);
+    climbingSol = new Solenoid(2);
   }
 
   @Override

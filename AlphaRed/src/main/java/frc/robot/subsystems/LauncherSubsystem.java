@@ -20,7 +20,7 @@ public class LauncherSubsystem extends SubsystemBase {
   private SparkMax launcherMotorSlave;
   private TalonSRX aimingMotor;
 
-  private Solenoid launcherSol;
+  
 
   public LauncherSubsystem() {
 
