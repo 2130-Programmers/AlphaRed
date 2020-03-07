@@ -30,8 +30,8 @@ public final class Constants {
     public static int driverButtonB = 2;
     public static int driverButtonX = 3;
     public static int driverButtonY = 4;
-    public static int driverButtonLB = 5;
-    public static int driverButtonRB = 6;
+    public static int driverButtonLB = 5;                   //Strafe Easy Mode Button
+    public static int driverButtonRB = 6;                   //Point Turn Button
     public static int driverButtonBack = 7;
     public static int driverButtonStart = 8;
     public static int driverButtonLeftJoyClick = 9;
@@ -48,4 +48,13 @@ public final class Constants {
     public static int operatorButtonStart = 8;
     public static int operatorButtonLeftJoyClick = 9;
     public static int operatorButtonRightJoyClick = 10;
+  
+    public static double handlerMotorSpeed = .1;
+  
+    public static int leftAxisX = 0;
+    public static int leftAxisY = 1;
+    public static int rightAxisX = 4;
+    public static int rightAxisY = 5;
+    public static int leftAxisTrigger = 2;
+    public static int rightAxisTrigger = 3;
 }

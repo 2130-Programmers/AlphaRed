@@ -34,12 +34,12 @@ public class DriveSwerveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveDriveSubsystem.moveSwerveAxis(RobotContainer.getDriverAxis(Constants.leftX), 
-                                        RobotContainer.getDriverAxis(Constants.leftY), 
-                                        RobotContainer.getDriverAxis(Constants.rightX), 
-                                        RobotContainer.getDriverAxis(Constants.rightY),
-                                        RobotContainer.getDriverAxis(Constants.leftTrigger),
-                                        RobotContainer.getDriverAxis(Constants.rightTrigger));
+    swerveDriveSubsystem.moveSwerveAxis(RobotContainer.getDriverAxis(Constants.leftAxisX), 
+                                        RobotContainer.getDriverAxis(Constants.leftAxisY), 
+                                        RobotContainer.getDriverAxis(Constants.rightAxisX), 
+                                        RobotContainer.getDriverAxis(Constants.rightAxisY),
+                                        RobotContainer.getDriverAxis(Constants.leftAxisTrigger),
+                                        RobotContainer.getDriverAxis(Constants.rightAxisTrigger));
   }
 
   // Called once the command ends or is interrupted.

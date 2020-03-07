@@ -8,13 +8,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.RobotContainer;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.Solenoid;
 
 public class LauncherSubsystem extends SubsystemBase {
   /**
@@ -33,10 +33,10 @@ public class LauncherSubsystem extends SubsystemBase {
     launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
     launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
 
-
     joyValPrev = 0;
     finalSpeed = 0;
 
+    setMasterMotor();
   }
 
   @Override
@@ -67,6 +67,10 @@ public class LauncherSubsystem extends SubsystemBase {
     } else {
       MotorStop();
     }
+  }
+
+  public void setMasterMotor() {
+    launcherMotorSlave.follow(launcherMotorMaster);
   }
 
 }
