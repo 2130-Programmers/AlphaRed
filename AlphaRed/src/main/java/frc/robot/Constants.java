@@ -16,6 +16,16 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static int largeSwerveRotationError = 10;
+    public static int smallSwerveRotationError = 2;
+    public static double slowSwerveRotationSpeed = 0.1;
+    public static double fastSwerveRotationSpeed = 0.5;
+
+    public static int strafeEasyModeButton = 5;
+    public static int pointTurnButon = 6;
+
+    public static double pointSpeed = 0.2;
+  
     public static int driverButtonA = 1;
     public static int driverButtonB = 2;
     public static int driverButtonX = 3;
@@ -38,6 +48,4 @@ public final class Constants {
     public static int operatorButtonStart = 8;
     public static int operatorButtonLeftJoyClick = 9;
     public static int operatorButtonRightJoyClick = 10;
-   
-
 }
