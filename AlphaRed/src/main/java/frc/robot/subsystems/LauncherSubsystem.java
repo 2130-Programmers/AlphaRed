@@ -8,7 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -16,14 +19,19 @@ public class LauncherSubsystem extends SubsystemBase {
   /**
    * Creates a new LauncherSubsystem.
    */
-  private SparkMax launcherMotorMaster;
-  private SparkMax launcherMotorSlave;
+  private CANSparkMax launcherMotorMaster;
+  private CANSparkMax launcherMotorSlave;
   private TalonSRX aimingMotor;
 
   
 
   public LauncherSubsystem() {
 
+    launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
+    launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
+
+    setMasterMotor();
+    
   }
 
   @Override
@@ -31,5 +39,9 @@ public class LauncherSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+
+  public void setMasterMotor() {
+    launcherMotorSlave.follow(launcherMotorMaster);
+  }
 
 }
