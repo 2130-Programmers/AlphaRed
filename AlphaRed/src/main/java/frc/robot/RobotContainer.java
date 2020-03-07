@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DriveTrainCommand;
+import frc.robot.commands.DriveSwerveCommand;
+import frc.robot.commands.PointTurnCommand;
+import frc.robot.commands.StrafeEasyModeCommand;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -35,15 +37,18 @@ public class RobotContainer {
   private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
 
-  private final DriveTrainCommand driveTrainCommand = new DriveTrainCommand();
+  private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDriveSubsystem);
+  private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDriveSubsystem);
+  private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDriveSubsystem);
 
-  private final Joystick driverJoystick = new Joystick(0);
+
+  private static final Joystick driverJoystick = new Joystick(0);
   private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, Constants.driverButtonA);
   private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, Constants.driverButtonB);
   private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, Constants.driverButtonX);
   private final JoystickButton driverButtonY = new JoystickButton(driverJoystick, Constants.driverButtonY);
-  private final JoystickButton driverButtonLB = new JoystickButton(driverJoystick, Constants.driverButtonLB);
-  private final JoystickButton driverButtonRB = new JoystickButton(driverJoystick, Constants.driverButtonRB);
+  private final JoystickButton strafeEasyModeButton = new JoystickButton(driverJoystick, Constants.driverButtonLB);
+  private final JoystickButton pointTurnButton = new JoystickButton(driverJoystick, Constants.driverButtonRB);
   private final JoystickButton driverButtonBack = new JoystickButton(driverJoystick, Constants.driverButtonBack);
   private final JoystickButton driverButtonStart = new JoystickButton(driverJoystick, Constants.driverButtonStart);
   private final JoystickButton driverButtonLeftJoyClick = new JoystickButton(driverJoystick, Constants.driverButtonLeftJoyClick);
@@ -68,6 +73,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    swerveDriveSubsystem.setDefaultCommand(driveSwerveCommand);
   }
 
   /**
@@ -77,6 +84,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    pointTurnButton.whileHeld(pointTurnCommand, true);
+    strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
   }
 
 
