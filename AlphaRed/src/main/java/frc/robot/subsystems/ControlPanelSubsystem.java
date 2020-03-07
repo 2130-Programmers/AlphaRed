@@ -24,7 +24,7 @@ public class ControlPanelSubsystem extends SubsystemBase {
 
     controlPanelMotor = new TalonSRX(12);
 
-    controlPanelSol = new Solenoid(3);
+    controlPanelSol = new Solenoid(0);
   }
 
   @Override

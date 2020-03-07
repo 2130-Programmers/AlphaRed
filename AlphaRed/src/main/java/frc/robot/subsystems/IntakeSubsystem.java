@@ -23,12 +23,14 @@ public class IntakeSubsystem extends SubsystemBase {
   private TalonSRX intakeMotor;
 
   private DoubleSolenoid intakeSol;
+  private Solenoid feedSol;
   
   public IntakeSubsystem() {
 
     intakeMotor = new TalonSRX(10);
 
-    intakeSol = new DoubleSolenoid(1, 0);
+    intakeSol = new DoubleSolenoid(3, 4);
+    feedSol = new Solenoid(1);
   }
 
   @Override
