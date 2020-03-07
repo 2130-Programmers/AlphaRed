@@ -41,7 +41,7 @@ public class LauncherSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    joyVal = RobotContainer.driverJoystick.getRawAxis(2);
+    joyVal = RobotContainer.getDriverAxis(2);
     setMaster();
     // This method will be called once per scheduler run
   }
@@ -61,7 +61,7 @@ public class LauncherSubsystem extends SubsystemBase {
 
   public void motorRun() {
     //getting input from left trigger using getdriveraxis method and check value -cory
-    if (RobotContainer.driverJoystick.getRawAxis(2) > .01) {
+    if (RobotContainer.getDriverAxis(2) > .01) {
       //setting speed for sparkMax motor controllers -cory
       launcherMotorMaster.set(finalSpeed);
     } else {

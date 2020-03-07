@@ -38,10 +38,14 @@ public class RobotContainer {
   private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
 
-  public final LauncherCommand launcherCommand = new LauncherCommand(launcherSubsystem);
+  private final LauncherCommand launcherCommand = new LauncherCommand(launcherSubsystem);
   private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDriveSubsystem);
   private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDriveSubsystem);
   private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDriveSubsystem);
+
+  /**
+   * The Driver Joystick declaration and the button definitions associated with it.
+   */
 
   private static final Joystick driverJoystick = new Joystick(0);
   
@@ -56,21 +60,22 @@ public class RobotContainer {
   private final JoystickButton driverButtonLeftJoyClick = new JoystickButton(driverJoystick, Constants.driverButtonLeftJoyClick);
   private final JoystickButton driverButtonRightJoyClick = new JoystickButton(driverJoystick, Constants.driverButtonRightJoyClick);
 
-  private final Joystick operatorJoystick = new Joystick(1);
+  /**
+   * The Operator Joystick declaration and the button definitions associated with it.
+   */
+
+  private final static Joystick operatorJoystick = new Joystick(1);
+
   private final static JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
-  private final JoystickButton operatorButtonB = new JoystickButton(operatorJoystick, Constants.operatorButtonB);
+  private final JoystickButton operatorButtonB = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
   private final JoystickButton operatorButtonX = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
   private final JoystickButton operatorButtonY = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
   private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
   private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
   private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
-  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick,
-      Constants.operatorButtonStart);
-  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick,
-      Constants.operatorButtonLeftJoyClick);
-  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick,
-      Constants.operatorButtonRightJoyClick);
-  // TODO: make a port
+  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
+  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonLeftJoyClick);
+  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonRightJoyClick);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -78,7 +83,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    
+
     launcherSubsystem.setDefaultCommand(launcherCommand);
     swerveDriveSubsystem.setDefaultCommand(driveSwerveCommand);
   }
@@ -92,10 +97,6 @@ public class RobotContainer {
   private void configureButtonBindings() {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
-  }
-
-
-    
   }
 
   /**
