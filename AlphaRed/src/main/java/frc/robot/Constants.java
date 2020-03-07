@@ -48,4 +48,6 @@ public final class Constants {
     public static int operatorButtonStart = 8;
     public static int operatorButtonLeftJoyClick = 9;
     public static int operatorButtonRightJoyClick = 10;
+
+    public static double handlerMotorSpeed = .1;
 }
