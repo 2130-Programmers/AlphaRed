@@ -36,8 +36,8 @@ public class PointTurnCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveDriveSubsystem.moveSwervePointTurn(RobotContainer.getDriverAxis(Constants.leftTrigger),
-                                             RobotContainer.getDriverAxis(Constants.rightTrigger));
+    swerveDriveSubsystem.moveSwervePointTurn(RobotContainer.getDriverAxis(Constants.leftAxisTrigger),
+                                             RobotContainer.getDriverAxis(Constants.rightAxisTrigger));
   }
 
   // Called once the command ends or is interrupted.
