@@ -35,7 +35,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
-  private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
+  public static final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
 
   private final LauncherCommand launcherCommand = new LauncherCommand(launcherSubsystem);

@@ -23,10 +23,9 @@ public class ControlPanelSubsystem extends SubsystemBase {
 
   private Solenoid controlPanelSol;
 
-  public boolean handlerPosition;
+  public static boolean handlerPosition;
 
   private int i;
-
 
   public ControlPanelSubsystem() {
 
@@ -43,9 +42,11 @@ public class ControlPanelSubsystem extends SubsystemBase {
   public void moveHandlerOut() {
     controlPanelSol.set(true);
   }
+
   public void moveHandlerIn() {
     controlPanelSol.set(false);
   }
+
   public void moveControlPanel() {
     controlPanelMotor.set(ControlMode.PercentOutput, 1);
   }
@@ -53,21 +54,26 @@ public class ControlPanelSubsystem extends SubsystemBase {
   public void handlerPositionSetting() {
     if (handlerPosition) {
       moveHandlerOut();
-    }
-    else {
+    } else {
       moveHandlerIn();
     }
+  }
+
+  public void setHandlerBoolean() {
+    if (i == 0 && RobotContainer.handlerPositionValue()) {
+      handlerPosition = !handlerPosition;
+      i++;
+    } else if (!RobotContainer.handlerPositionValue()) {
+      i = 0;
     }
-    public void setHandlerBoolean() {
-      if(i == 0 && RobotContainer.handlerPositionValue()) {
-        handlerPosition = !handlerPosition;
-        i++;
-      } else if (!RobotContainer.handlerPositionValue()) {
-        i = 0;
-      }
   }
 
   public void moveHandlerMotor() {
     controlPanelMotor.set(ControlMode.PercentOutput, Constants.handlerMotorSpeed);
+  }
+
+  public  void setStartingPosition() {
+    handlerPosition = true;
+    controlPanelSol.set(true);
   }
 }
