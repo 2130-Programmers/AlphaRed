@@ -35,15 +35,15 @@ public class SwerveDriveSubsystem extends SubsystemBase {
 
   public SwerveDriveSubsystem() {
 
-    motorFL = new Motor(7, 16, 17, 3);
-    motorFR = new Motor(5, 14, 15, 2);
-    motorRL = new Motor(1, 12, 13, 0);
-    motorRR = new Motor(3, 10, 11, 1);    
+    motorFL = new Motor(2, 12, 10, 0);
+    motorFR = new Motor(4, 14, 13, 1);
+    motorRL = new Motor(6, 16, 15, 2);
+    motorRR = new Motor(8, 18, 17, 3);    
     
-    frontLeftDriveMotor = new TalonFX(6);
-    frontRightDriveMotor = new TalonFX(4);
-    rearLeftDriveMotor = new TalonFX(0);
-    rearRightDriveMotor = new TalonFX(2);
+    frontLeftDriveMotor = new TalonFX(1);
+    frontRightDriveMotor = new TalonFX(3);
+    rearLeftDriveMotor = new TalonFX(5);
+    rearRightDriveMotor = new TalonFX(7);
 
   }
 

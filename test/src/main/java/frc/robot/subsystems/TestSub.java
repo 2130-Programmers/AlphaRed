@@ -8,37 +8,39 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.Solenoid;
 
-public class LauncherSubsystem extends SubsystemBase {
+public class TestSub extends SubsystemBase {
   /**
-   * Creates a new LauncherSubsystem.
+   * Creates a new testSub.
    */
-  private CANSparkMax launcherMotorMaster;
-  private CANSparkMax launcherMotorSlave;
-  private TalonSRX aimingMotor;
-
-  
-
-  public LauncherSubsystem() {
-    launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
-    launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
-
-    setMasterMotor();
+  private TalonSRX testMotor;
+  private Solenoid testSol;
+  public TestSub() {
+    testMotor = new TalonSRX(1);
+    testSol = new Solenoid(1);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    testMotor.setInverted(true);
   }
 
-
-  public void setMasterMotor() {
-    launcherMotorSlave.follow(launcherMotorMaster);
+  public void testTheMotor() {
+    testMotor.set(ControlMode.PercentOutput, RobotContainer.driverJoystick.getRawAxis(1));
   }
 
+  public void testTheSolenoid() {
+    testSol.set(true);
+  }
+  public void testTheSolenoidOpposite() {
+    testSol.set(false);
+  }
 }

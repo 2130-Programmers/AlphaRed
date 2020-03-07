@@ -8,22 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.TestSub;
 
-public class DriveSwerveCommand extends CommandBase {
-
-  private SwerveDriveSubsystem swerveDriveSubsystem;
-
+public class TestComSol extends CommandBase {
   /**
-   * Creates a new driveSwerveCommand.
+   * Creates a new TestComSol.
    */
-  public DriveSwerveCommand(SwerveDriveSubsystem swerveDriveSubsystem) {
+  private TestSub testSub;
+  public TestComSol(TestSub tempSub) {
+    testSub = tempSub;
     // Use addRequirements() here to declare subsystem dependencies.
-
-    this.swerveDriveSubsystem = swerveDriveSubsystem;
-    addRequirements(this.swerveDriveSubsystem);
+    addRequirements(testSub);
   }
 
   // Called when the command is initially scheduled.
@@ -34,12 +29,7 @@ public class DriveSwerveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveDriveSubsystem.moveSwerveAxis(RobotContainer.getDriverAxis(Constants.leftAxisX), 
-                                        RobotContainer.getDriverAxis(Constants.leftAxisY), 
-                                        RobotContainer.getDriverAxis(Constants.rightAxisX), 
-                                        RobotContainer.getDriverAxis(Constants.rightAxisY),
-                                        RobotContainer.getDriverAxis(Constants.leftAxisTrigger),
-                                        RobotContainer.getDriverAxis(Constants.rightAxisTrigger));
+    testSub.testTheSolenoid();
   }
 
   // Called once the command ends or is interrupted.
