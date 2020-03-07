@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveTrainCommand;
+import frc.robot.commands.LauncherCommand;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -30,14 +31,15 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveDriveSubsystem swerveDriveSubsystem = new SwerveDriveSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
+  public final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
   private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
 
+  public final LauncherCommand launcherCommand = new LauncherCommand(launcherSubsystem);
   private final DriveTrainCommand driveTrainCommand = new DriveTrainCommand();
 
-  private final Joystick driverJoystick = new Joystick(0);
+  public static Joystick driverJoystick = new Joystick(0);
   private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, Constants.driverButtonA);
   private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, Constants.driverButtonB);
   private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, Constants.driverButtonX);
@@ -68,6 +70,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    
+    launcherSubsystem.setDefaultCommand(launcherCommand);
   }
 
   /**
