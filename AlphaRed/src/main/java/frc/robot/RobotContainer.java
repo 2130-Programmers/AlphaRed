@@ -55,20 +55,23 @@ public class RobotContainer {
   private final JoystickButton driverButtonRightJoyClick = new JoystickButton(driverJoystick, Constants.driverButtonRightJoyClick);
 
   private final Joystick operatorJoystick = new Joystick(1);
-  private final JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
+  private final static JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
   private final JoystickButton operatorButtonB = new JoystickButton(operatorJoystick, Constants.operatorButtonB);
   private final JoystickButton operatorButtonX = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
   private final JoystickButton operatorButtonY = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
   private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
   private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
   private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
-  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
-  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonLeftJoyClick);
-  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonRightJoyClick);
-//TODO: make a port
+  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick,
+      Constants.operatorButtonStart);
+  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick,
+      Constants.operatorButtonLeftJoyClick);
+  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick,
+      Constants.operatorButtonRightJoyClick);
+  // TODO: make a port
 
   /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
+   * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
@@ -78,16 +81,19 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by instantiating a {@link GenericHID} or one of its subclasses
+   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
   }
 
+
+    
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -106,4 +112,8 @@ public class RobotContainer {
       return driverJoystick.getRawAxis(axis);
     }
   }
+
+  public static boolean handlerPositionValue() {
+    return operatorButtonA.get();
+}
 }
