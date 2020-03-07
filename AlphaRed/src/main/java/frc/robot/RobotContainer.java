@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.LauncherCommand;
 import frc.robot.commands.DriveSwerveCommand;
 import frc.robot.commands.PointTurnCommand;
 import frc.robot.commands.StrafeEasyModeCommand;
@@ -32,17 +33,18 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveDriveSubsystem swerveDriveSubsystem = new SwerveDriveSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
+  public final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
   private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
 
+  public final LauncherCommand launcherCommand = new LauncherCommand(launcherSubsystem);
   private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDriveSubsystem);
   private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDriveSubsystem);
   private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDriveSubsystem);
 
-
   private static final Joystick driverJoystick = new Joystick(0);
+  
   private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, Constants.driverButtonA);
   private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, Constants.driverButtonB);
   private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, Constants.driverButtonX);
@@ -76,7 +78,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
+    
+    launcherSubsystem.setDefaultCommand(launcherCommand);
     swerveDriveSubsystem.setDefaultCommand(driveSwerveCommand);
   }
 
