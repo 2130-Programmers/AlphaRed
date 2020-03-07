@@ -8,21 +8,23 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.SparkMax;
+
+import com.revrobotics.CANSparkMax;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.Solenoid;
 
 public class LauncherSubsystem extends SubsystemBase {
   /**
    * Creates a new LauncherSubsystem.
    */
-  private SparkMax launcherMotorMaster;
-  private SparkMax launcherMotorSlave;
+  private CANSparkMax launcherMotorMaster;
+  private CANSparkMax launcherMotorSlave;
   private TalonSRX aimingMotor;
 
   
 
   public LauncherSubsystem() {
+
+    launcherMotorMaster = new CANSparkMax(deviceID, type)
 
   }
 
