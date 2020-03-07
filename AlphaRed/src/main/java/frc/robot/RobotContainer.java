@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import java.beans.Beans;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,9 +15,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
-import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
+import frc.robot.subsystems.SensorsSubsystem;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -29,16 +28,16 @@ import frc.robot.subsystems.LauncherSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
+  private final SwerveDriveSubsystem swerveDriveSubsystem = new SwerveDriveSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
   private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
-
+  public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
 
   private final DriveTrainCommand driveTrainCommand = new DriveTrainCommand();
 
-  private final Joystick driverJoystick = new Joystick(0);
+  private static final Joystick driverJoystick = new Joystick(0);
   private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, 1);
   private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, 2);
   private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, 3);
@@ -61,7 +60,7 @@ public class RobotContainer {
   private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick, 8);
   private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, 9);
   private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, 10);
-//TODO: make a port
+  //TODO: make a port
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -89,5 +88,13 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return null;
+  }
+
+  public static double getDriverAxis(int axis) {
+    if (axis == 1 || axis == 5) {
+      return -driverJoystick.getRawAxis(axis);
+    } else {
+      return driverJoystick.getRawAxis(axis);
+    }
   }
 }
