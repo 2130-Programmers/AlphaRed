@@ -8,6 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -36,4 +39,21 @@ public class ClimbingSubsystem extends SubsystemBase {
   public void putClimberDown() {
     climbingSol.set(false);
   }
+
+  public void runClimbMotor(){
+    climbingMotor.set(ControlMode.PercentOutput, .5);
+  }
+
+  public void stopClimbMotor(){
+    climbingMotor.set(ControlMode.PercentOutput, 0);
+  }
+
+  public void climbMotor(){
+    if(RobotContainer.climbButtonValue() == true){
+      runClimbMotor();
+    }else{
+      stopClimbMotor();
+    }
+  }
+
 }

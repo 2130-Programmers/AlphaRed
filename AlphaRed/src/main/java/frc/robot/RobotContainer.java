@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.LauncherCommand;
+import frc.robot.commands.ClimbMotorCom;
+import frc.robot.commands.ClimbSolenoidCom;
 import frc.robot.commands.DriveSwerveCommand;
 import frc.robot.commands.PointTurnCommand;
 import frc.robot.commands.StrafeEasyModeCommand;
@@ -42,6 +44,8 @@ public class RobotContainer {
   private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDriveSubsystem);
   private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDriveSubsystem);
   private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDriveSubsystem);
+  private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
+  private final ClimbMotorCom climbMotorCom = new ClimbMotorCom(climbingSubsystem);
 
   /**
    * The Driver Joystick declaration and the button definitions associated with it.
@@ -67,7 +71,7 @@ public class RobotContainer {
   private final static Joystick operatorJoystick = new Joystick(1);
 
   private final static JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
-  private final JoystickButton operatorButtonB = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
+  private final static JoystickButton operatorButtonB = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
   private final JoystickButton operatorButtonX = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
   private final JoystickButton operatorButtonY = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
   private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
@@ -97,6 +101,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
+    operatorButtonB.whenPressed(climbMotorCom, true);
+    operatorButtonX.whenPressed(climbSolenoidCom, true);
   }
 
   /**
@@ -119,5 +125,11 @@ public class RobotContainer {
 
   public static boolean handlerPositionValue() {
     return operatorButtonA.get();
-}
+  }
+
+  public static boolean climbButtonValue(){
+    return operatorButtonB.get();
+  }
+
+
 }
