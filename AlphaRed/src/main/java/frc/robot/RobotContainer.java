@@ -13,11 +13,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.LauncherCommand;
+import frc.robot.commands.ChangeHandlerPosition;
+import frc.robot.commands.ChangeHandlerPositionCommand;
 import frc.robot.commands.ClimbMotorCom;
 import frc.robot.commands.ClimbSolenoidCom;
 import frc.robot.commands.DriveSwerveCommand;
+import frc.robot.commands.FlopIntakeInCommand;
+import frc.robot.commands.FlopIntakeOutCommand;
+import frc.robot.commands.HandlerBooleanCommand;
+import frc.robot.commands.HandlerMotorCommand;
 import frc.robot.commands.PointTurnCommand;
 import frc.robot.commands.StrafeEasyModeCommand;
+import frc.robot.commands.runIntakeMotorCommand;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -44,6 +51,11 @@ public class RobotContainer {
   private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDriveSubsystem);
   private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDriveSubsystem);
   private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDriveSubsystem);
+  private final FlopIntakeInCommand flopIntakeInCommand = new FlopIntakeInCommand(intakeSubsystem);
+  private final FlopIntakeOutCommand flopIntakeOutCommand = new FlopIntakeOutCommand(intakeSubsystem);
+  private final HandlerBooleanCommand handlerBooleanCommand = new HandlerBooleanCommand(controlPanelSubsystem);
+  private final ChangeHandlerPositionCommand changeHandlerPositionCommand = new ChangeHandlerPositionCommand(controlPanelSubsystem);
+  private final HandlerMotorCommand handlerMotorCommand = new HandlerMotorCommand(controlPanelSubsystem);
   private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
   private final ClimbMotorCom climbMotorCom = new ClimbMotorCom(climbingSubsystem);
 
@@ -90,6 +102,8 @@ public class RobotContainer {
 
     launcherSubsystem.setDefaultCommand(launcherCommand);
     swerveDriveSubsystem.setDefaultCommand(driveSwerveCommand);
+    intakeSubsystem.setDefaultCommand(flopIntakeInCommand);
+    controlPanelSubsystem.setDefaultCommand(changeHandlerPositionCommand);
   }
 
   /**
@@ -120,6 +134,14 @@ public class RobotContainer {
       return -driverJoystick.getRawAxis(axis);
     } else {
       return driverJoystick.getRawAxis(axis);
+    }
+  }
+
+  public static double getOperatorAxis(int axis) {
+    if (axis == 1 || axis == 5) {
+      return -operatorJoystick.getRawAxis(axis);
+    } else {
+      return operatorJoystick.getRawAxis(axis);
     }
   }
 

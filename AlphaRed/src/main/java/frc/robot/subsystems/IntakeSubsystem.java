@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -39,15 +41,20 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void runIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, 1);
+    intakeMotor.set(ControlMode.PercentOutput, RobotContainer.getOperatorAxis(3)-RobotContainer.getOperatorAxis(2));
   }
-  public void putIntakeUp() {
+
+  public void stopIntake() {
+    intakeMotor.set(ControlMode.PercentOutput, 0);
+  }
+  public void flopIntakeOut() {
     intakeSol.set(Value.kForward);
   }
-  public void putIntakeDown() {
+  public void flopIntakeIn() {
     intakeSol.set(Value.kReverse);
   }
-  public void putIntakeNeutral() {
+  public void leaveIntakeNeutral() {
     intakeSol.set(Value.kOff);
   }
+
 }
