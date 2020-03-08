@@ -10,13 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ControlPanelSubsystem;
 
-public class HandlerMotorCommand extends CommandBase {
+public class ChangeHandlerPositionCommand extends CommandBase {
   /**
-   * Creates a new handlerMotorCommand.
+   * Creates a new changeHandlerPosition.
    */
-  private ControlPanelSubsystem controlPanelSubsystem;
-  
-  public HandlerMotorCommand(ControlPanelSubsystem controlPanelSubsystem) {
+
+   private ControlPanelSubsystem controlPanelSubsystem;
+
+  public ChangeHandlerPositionCommand(ControlPanelSubsystem controlPanelSubsystem) {
     this.controlPanelSubsystem = controlPanelSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.controlPanelSubsystem);
@@ -30,7 +31,7 @@ public class HandlerMotorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    controlPanelSubsystem.moveHandlerMotor();
+    controlPanelSubsystem.handlerPositionSetting();
   }
 
   // Called once the command ends or is interrupted.

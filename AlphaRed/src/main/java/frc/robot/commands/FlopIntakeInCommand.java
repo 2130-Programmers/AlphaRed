@@ -8,18 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ControlPanelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class HandlerMotorCommand extends CommandBase {
+public class FlopIntakeInCommand extends CommandBase {
   /**
-   * Creates a new handlerMotorCommand.
+   * Creates a new FlopIntakeInCommand.
    */
-  private ControlPanelSubsystem controlPanelSubsystem;
-  
-  public HandlerMotorCommand(ControlPanelSubsystem controlPanelSubsystem) {
-    this.controlPanelSubsystem = controlPanelSubsystem;
+  private IntakeSubsystem intakeSubsystem;
+  public FlopIntakeInCommand(IntakeSubsystem intakeSubsystem) {
+    this.intakeSubsystem = intakeSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.controlPanelSubsystem);
+    addRequirements(this.intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +29,7 @@ public class HandlerMotorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    controlPanelSubsystem.moveHandlerMotor();
+    intakeSubsystem.flopIntakeIn();
   }
 
   // Called once the command ends or is interrupted.
