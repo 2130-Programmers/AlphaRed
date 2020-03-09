@@ -13,9 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.LauncherCommand;
-import frc.robot.commands.ChangeHandlerPosition;
 import frc.robot.commands.ChangeHandlerPositionCommand;
-import frc.robot.commands.ClimbMotorCom;
+import frc.robot.commands.ClimbMotorCommand;
 import frc.robot.commands.ClimbSolenoidCom;
 import frc.robot.commands.DriveSwerveCommand;
 import frc.robot.commands.FlopIntakeInCommand;
@@ -24,13 +23,12 @@ import frc.robot.commands.HandlerBooleanCommand;
 import frc.robot.commands.HandlerMotorCommand;
 import frc.robot.commands.PointTurnCommand;
 import frc.robot.commands.StrafeEasyModeCommand;
-import frc.robot.commands.runIntakeMotorCommand;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LauncherSubsystem;
+import frc.robot.subsystems.LauncherPIDSubsystem;
 import frc.robot.subsystems.SensorsSubsystem;
-import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.SwerveDrivePIDSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -40,24 +38,24 @@ import frc.robot.subsystems.SwerveDriveSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final SwerveDriveSubsystem swerveDriveSubsystem = new SwerveDriveSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  public final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
-  private final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
-  private final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
+  public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public static final LauncherPIDSubsystem launcherPIDSubsystem = new LauncherPIDSubsystem();
+  public static final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
+  public static final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
+  public static final SwerveDrivePIDSubsystem swerveDrivePIDSubsystem = new SwerveDrivePIDSubsystem();
 
-  private final LauncherCommand launcherCommand = new LauncherCommand(launcherSubsystem);
-  private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDriveSubsystem);
-  private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDriveSubsystem);
-  private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDriveSubsystem);
+  private final LauncherCommand launcherCommand = new LauncherCommand(launcherPIDSubsystem);
+  private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDrivePIDSubsystem);
+  private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDrivePIDSubsystem);
+  private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDrivePIDSubsystem);
   private final FlopIntakeInCommand flopIntakeInCommand = new FlopIntakeInCommand(intakeSubsystem);
   private final FlopIntakeOutCommand flopIntakeOutCommand = new FlopIntakeOutCommand(intakeSubsystem);
   private final HandlerBooleanCommand handlerBooleanCommand = new HandlerBooleanCommand(controlPanelSubsystem);
   private final ChangeHandlerPositionCommand changeHandlerPositionCommand = new ChangeHandlerPositionCommand(controlPanelSubsystem);
   private final HandlerMotorCommand handlerMotorCommand = new HandlerMotorCommand(controlPanelSubsystem);
   private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
-  private final ClimbMotorCom climbMotorCom = new ClimbMotorCom(climbingSubsystem);
+  private final ClimbMotorCommand climbMotorCommand = new ClimbMotorCommand(climbingSubsystem);
 
   /**
    * The Driver Joystick declaration and the button definitions associated with it.
@@ -78,9 +76,9 @@ public class RobotContainer {
 
   /**
    * The Operator Joystick declaration and the button definitions associated with it.
-   */
+   */ 
 
-  private final static Joystick operatorJoystick = new Joystick(1);
+  private static final Joystick operatorJoystick = new Joystick(1);
 
   private final static JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
   private final static JoystickButton operatorButtonB = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
@@ -100,8 +98,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    launcherSubsystem.setDefaultCommand(launcherCommand);
-    swerveDriveSubsystem.setDefaultCommand(driveSwerveCommand);
+    launcherPIDSubsystem.setDefaultCommand(launcherCommand);
+    swerveDrivePIDSubsystem.setDefaultCommand(driveSwerveCommand);
     intakeSubsystem.setDefaultCommand(flopIntakeInCommand);
     controlPanelSubsystem.setDefaultCommand(changeHandlerPositionCommand);
   }
@@ -115,7 +113,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
-    operatorButtonB.whenPressed(climbMotorCom, true);
+    operatorButtonB.whenPressed(climbMotorCommand, true);
     operatorButtonX.whenPressed(climbSolenoidCom, true);
   }
 

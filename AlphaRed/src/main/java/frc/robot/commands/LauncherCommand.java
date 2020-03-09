@@ -8,16 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LauncherSubsystem;
+import frc.robot.subsystems.LauncherPIDSubsystem;
 
 public class LauncherCommand extends CommandBase {
   /**
    * Creates a new LauncherCommand.
    */
-  private LauncherSubsystem launcherSubsystem;
-  public LauncherCommand(LauncherSubsystem launcherSubsystem) {
-    this.launcherSubsystem = launcherSubsystem;
-    addRequirements(this.launcherSubsystem);
+  private LauncherPIDSubsystem launcherPIDSubsystem;
+  public LauncherCommand(LauncherPIDSubsystem launcherPIDSubsystem) {
+    this.launcherPIDSubsystem = launcherPIDSubsystem;
+    addRequirements(this.launcherPIDSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,13 +29,13 @@ public class LauncherCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcherSubsystem.motorRun();
+    launcherPIDSubsystem.motorRun();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherSubsystem.MotorStop();
+    launcherPIDSubsystem.MotorStop();
   }
 
   // Returns true when the command should end.

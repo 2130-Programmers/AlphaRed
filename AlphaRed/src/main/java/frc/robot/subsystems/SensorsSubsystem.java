@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -24,9 +23,9 @@ public class SensorsSubsystem extends SubsystemBase {
   public double x;
   public double y;
   public double area;
-  public double linearEncoder;
+  public double linearEncoderValue;
 
-  public AnalogPotentiometer tLinearEncoder;
+  public AnalogPotentiometer linearEncoder;
   
 
   /**
@@ -39,7 +38,7 @@ public class SensorsSubsystem extends SubsystemBase {
     ty = limelightTable.getEntry("ty");
     ta = limelightTable.getEntry("ta");
 
-    tLinearEncoder = new AnalogPotentiometer(0);
+    linearEncoder = new AnalogPotentiometer(0);
   }
 
   @Override
@@ -50,7 +49,7 @@ public class SensorsSubsystem extends SubsystemBase {
     y = ty.getDouble(0.0);
     area = ta.getDouble(0.0);
 
-    linearEncoder = tLinearEncoder.get();
+    linearEncoderValue = linearEncoder.get();
 
   }
 }

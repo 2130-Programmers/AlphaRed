@@ -10,21 +10,21 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.SwerveDrivePIDSubsystem;
 
 public class PointTurnCommand extends CommandBase {
 
-  private SwerveDriveSubsystem swerveDriveSubsystem;
+  private SwerveDrivePIDSubsystem swerveDrivePIDSubsystem;
 
   /**
    * Creates a new PointTurnLeftCommand.
    */
-  public PointTurnCommand(SwerveDriveSubsystem swerveDriveSubsystem) {
+  public PointTurnCommand(SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    this.swerveDriveSubsystem = swerveDriveSubsystem;
+    this.swerveDrivePIDSubsystem = swerveDrivePIDSubsystem;
 
-    addRequirements(this.swerveDriveSubsystem);
+    addRequirements(this.swerveDrivePIDSubsystem);
 
   }
 
@@ -36,8 +36,8 @@ public class PointTurnCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveDriveSubsystem.moveSwervePointTurn(RobotContainer.getDriverAxis(Constants.leftAxisTrigger),
-                                             RobotContainer.getDriverAxis(Constants.rightAxisTrigger));
+    swerveDrivePIDSubsystem.moveSwervePointTurn(RobotContainer.getDriverAxis(Constants.driverLeftAxisTrigger),
+                                                RobotContainer.getDriverAxis(Constants.driverRightAxisTrigger));
   }
 
   // Called once the command ends or is interrupted.

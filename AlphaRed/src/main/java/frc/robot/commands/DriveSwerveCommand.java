@@ -10,20 +10,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.SwerveDrivePIDSubsystem;
 
 public class DriveSwerveCommand extends CommandBase {
 
-  private SwerveDriveSubsystem swerveDriveSubsystem;
+  private SwerveDrivePIDSubsystem swerveDrivePIDSubsystem;
 
   /**
    * Creates a new driveSwerveCommand.
    */
-  public DriveSwerveCommand(SwerveDriveSubsystem swerveDriveSubsystem) {
+  public DriveSwerveCommand(SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    this.swerveDriveSubsystem = swerveDriveSubsystem;
-    addRequirements(this.swerveDriveSubsystem);
+    this.swerveDrivePIDSubsystem = swerveDrivePIDSubsystem;
+    addRequirements(this.swerveDrivePIDSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -34,12 +34,12 @@ public class DriveSwerveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveDriveSubsystem.moveSwerveAxis(RobotContainer.getDriverAxis(Constants.leftAxisX), 
-                                        RobotContainer.getDriverAxis(Constants.leftAxisY), 
-                                        RobotContainer.getDriverAxis(Constants.rightAxisX), 
-                                        RobotContainer.getDriverAxis(Constants.rightAxisY),
-                                        RobotContainer.getDriverAxis(Constants.leftAxisTrigger),
-                                        RobotContainer.getDriverAxis(Constants.rightAxisTrigger));
+    swerveDrivePIDSubsystem.moveSwerveAxis(RobotContainer.getDriverAxis(Constants.driverLeftAxisX), 
+                                           RobotContainer.getDriverAxis(Constants.driverLeftAxisY), 
+                                           RobotContainer.getDriverAxis(Constants.driverRightAxisX), 
+                                           RobotContainer.getDriverAxis(Constants.driverRightAxisY),
+                                           RobotContainer.getDriverAxis(Constants.driverLeftAxisTrigger),
+                                           RobotContainer.getDriverAxis(Constants.driverRightAxisTrigger));
   }
 
   // Called once the command ends or is interrupted.

@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimbingSubsystem;
 
-public class ClimbMotorCom extends CommandBase {
+public class ClimbMotorCommand extends CommandBase {
   /**
    * Creates a new ClimbMotorCom.
    */
   private ClimbingSubsystem climbingSubsystem;
-  public ClimbMotorCom(ClimbingSubsystem climbingSubsystem) {
+  public ClimbMotorCommand(ClimbingSubsystem climbingSubsystem) {
     this.climbingSubsystem = climbingSubsystem;
     addRequirements(this.climbingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.

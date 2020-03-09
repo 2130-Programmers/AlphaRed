@@ -37,7 +37,7 @@ public class Motor {
 
     prox = new DigitalInput(proxPortID);
 
-    setMinMaxOutput(1, -1);
+    setMinMaxOutput(Constants.dirMMaxRotationOutput, Constants.dirMMinRotationOutput);
 
   }
 
@@ -64,6 +64,15 @@ public class Motor {
 
   */
 
+  /**
+   * 
+   * Takes a given X and Y and determines a desired angle for directionality of the 
+   * wheel. It then supplies enough power to go to the desired angle.
+   * 
+   * @param dirX The X value given to determine the desired angle
+   * @param dirY The Y value given to determine the desired angle
+   */
+
   public void swerveDatBoi(double dirX, double dirY) {
 
     long desiredTarget;
@@ -74,6 +83,19 @@ public class Motor {
       desiredTarget = directionTargetValue(dirX, dirY);
     }
 
+    this.swerveDatBoi(desiredTarget);
+  }
+
+  /**
+   * Takes a given desired target and determines a desired angle for directionality of the 
+   * wheel. It then supplies enough power to go to the desired angle.
+   * This is essentially an override to the method using dirX and dirY.
+   * 
+   * @param desiredTarget The value given as an "override" to the X's and Y's
+   * 
+   */
+
+  public void swerveDatBoi(long desiredTarget) {
     if (encoderRemaining(desiredTarget, true) < Constants.smallSwerveRotationError) {
       stopMotors();
     } else if (encoderRemaining(desiredTarget, true) < Constants.largeSwerveRotationError) {
@@ -81,7 +103,6 @@ public class Motor {
     } else {
       moveMotor(Constants.fastSwerveRotationSpeed * (encoderRemaining(desiredTarget, false)/encoderRemaining(desiredTarget, true)));
     }
-
   }
 
   /**
@@ -181,6 +202,14 @@ public class Motor {
 
   private double piOverTwo() {
     return Math.PI/2;
+  }
+
+  public void findZero() {
+    while(!proxValue()) {
+      moveMotor(1);
+    }
+    zeroEncoder();
+    swerveDatBoi(104);
   }
 
 }

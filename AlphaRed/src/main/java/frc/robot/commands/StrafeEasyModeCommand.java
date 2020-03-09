@@ -8,21 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.SwerveDrivePIDSubsystem;
 
 public class StrafeEasyModeCommand extends CommandBase {
 
-  private SwerveDriveSubsystem swerveDriveSubsystem;
+  private SwerveDrivePIDSubsystem swerveDrivePIDSubsystem;
 
   /**
    * Creates a new StrafeEasyModeCommand.
    */
-  public StrafeEasyModeCommand(SwerveDriveSubsystem swerveDriveSubsystem) {
+  public StrafeEasyModeCommand(SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    this.swerveDriveSubsystem = swerveDriveSubsystem;
-    addRequirements(this.swerveDriveSubsystem);
+    this.swerveDrivePIDSubsystem = swerveDrivePIDSubsystem;
+    addRequirements(this.swerveDrivePIDSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,9 +34,8 @@ public class StrafeEasyModeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //swerveDriveSubsystem.moveSwerveStrafe(RobotContainer.getDriverAxis(Constants.leftTrigger),
-    //                                      RobotContainer.getDriverAxis(Constants.rightTrigger));
-    swerveDriveSubsystem.targetWithSwerve(RobotContainer.sensorsSubsystem.x);
+    swerveDrivePIDSubsystem.moveSwerveStrafe(RobotContainer.getDriverAxis(Constants.driverLeftAxisTrigger),
+                                             RobotContainer.getDriverAxis(Constants.driverRightAxisTrigger));
   }
 
   // Called once the command ends or is interrupted.

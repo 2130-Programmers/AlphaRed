@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -55,6 +54,12 @@ public class IntakeSubsystem extends SubsystemBase {
   }
   public void leaveIntakeNeutral() {
     intakeSol.set(Value.kOff);
+  }
+  public void releaseBalls() {
+    feedSol.set(true);
+  }
+  public void stopBalls() {
+    feedSol.set(false);
   }
 
 }
