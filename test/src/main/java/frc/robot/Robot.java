@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -96,6 +97,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putBoolean("Input 0", RobotContainer.testSub.testtheProx(0));
+    SmartDashboard.putBoolean("Input 1", RobotContainer.testSub.testtheProx(1));
+    SmartDashboard.putBoolean("Input 2", RobotContainer.testSub.testtheProx(2));
+    SmartDashboard.putBoolean("Input 3", RobotContainer.testSub.testtheProx(3));
+
+    SmartDashboard.putNumber("Enc Value 0", RobotContainer.testSub.testTheEncoders(0));
+    SmartDashboard.putNumber("Enc Value 1", RobotContainer.testSub.testTheEncoders(1));
+    SmartDashboard.putNumber("Enc Value 2", RobotContainer.testSub.testTheEncoders(2));
+    SmartDashboard.putNumber("Enc Value 3", RobotContainer.testSub.testTheEncoders(3));
   }
 
   @Override
