@@ -80,10 +80,10 @@ public class RobotContainer {
 
   private static final Joystick operatorJoystick = new Joystick(1);
 
-  private final static JoystickButton operatorButtonA = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
-  private final static JoystickButton operatorButtonB = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
-  private final JoystickButton operatorButtonX = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
-  private final JoystickButton operatorButtonY = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
+  private final static JoystickButton changeHandlerPositionButton = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
+  private final static JoystickButton climbMotorActivationButton = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
+  private final JoystickButton flopIntakeInButton = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
+  private final JoystickButton flopIntakeOutButton = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
   private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
   private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
   private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
@@ -113,11 +113,12 @@ public class RobotContainer {
   private void configureButtonBindings() {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
-    operatorButtonB.whenPressed(climbMotorCommand, true);
+    climbMotorActivationButton.whenPressed(climbMotorCommand, true);
     expelClimberButton.whenPressed(climbSolenoidCom, true);
+    changeHandlerPositionButton.whenPressed(changeHandlerPositionCommand);
 
-    operatorButtonX.whenPressed(flopIntakeInCommand, true);
-    operatorButtonY.whenPressed(flopIntakeOutCommand, true);
+    flopIntakeInButton.whenPressed(flopIntakeInCommand, true);
+    flopIntakeOutButton.whenPressed(flopIntakeOutCommand, true);
 
 
 
@@ -150,11 +151,11 @@ public class RobotContainer {
   }
 
   public static boolean handlerPositionValue() {
-    return operatorButtonA.get();
+    return changeHandlerPositionButton.get();
   }
 
   public static boolean climbButtonValue(){
-    return operatorButtonB.get();
+    return climbMotorActivationButton.get();
   }
 
 

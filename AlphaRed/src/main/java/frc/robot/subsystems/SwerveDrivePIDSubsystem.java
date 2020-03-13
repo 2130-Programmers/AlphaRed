@@ -26,9 +26,6 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
   public Motor motorRL;
   public Motor motorRR;
 
-
-  private double desiredSpeed;
-
   /**
    * Creates a new SwerveDrivePIDSubsystem.
    */
@@ -85,9 +82,19 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
       rightSwerves(rightX, rightY);
     }
 
-    desiredSpeed = findSpeed(rightT, leftT);
+    double frontDesiredSpeed = findSpeed(rightT, leftT);
+    double rearDesiredSpeed = frontDesiredSpeed;
 
-    moveDriveMotors(desiredSpeed);
+    if (leftY < 0) {
+      frontDesiredSpeed = -frontDesiredSpeed;
+    }
+
+    if (rightY < 0) {
+      rearDesiredSpeed = -rearDesiredSpeed;
+    }
+
+    moveDriveMotors(frontDesiredSpeed, rearDesiredSpeed);
+    
   }
 
   public void moveSwerveStrafe(double rightT, double leftT) {
@@ -98,7 +105,7 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
 
     double appliedSpeed = findSpeed(rightT, leftT);
 
-    moveDriveMotors(appliedSpeed);
+    moveDriveMotors(appliedSpeed, appliedSpeed);
   }
 
   public void zeroAllEncoders() {
@@ -126,18 +133,16 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
     return (positive - negitive)/2;
   }
 
-  private void moveDriveMotors(double speed) {
-
-    frontLeftDriveMotor.set(ControlMode.PercentOutput, speed);
-    frontRightDriveMotor.set(ControlMode.PercentOutput, speed);
-    rearLeftDriveMotor.set(ControlMode.PercentOutput, speed);
-    rearRightDriveMotor.set(ControlMode.PercentOutput, speed);
+  private void moveDriveMotors(double frontSpeed, double rearSpeed) {
+    frontLeftDriveMotor.set(ControlMode.PercentOutput, frontSpeed);
+    frontRightDriveMotor.set(ControlMode.PercentOutput, frontSpeed);
+    rearLeftDriveMotor.set(ControlMode.PercentOutput, rearSpeed);
+    rearRightDriveMotor.set(ControlMode.PercentOutput, rearSpeed);
 
     frontLeftDriveMotor.setInverted(true);
     frontRightDriveMotor.setInverted(false);
     rearLeftDriveMotor.setInverted(true);
     rearRightDriveMotor.setInverted(false);
-
   }
 
   private void leftSwerves(double x, double y) {
@@ -159,10 +164,10 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
    */
 
   public void moveSwervePointTurn(double rightT, double leftT) {
-    motorFL.swerveDatBoi(0.8, 0.6);
-    motorFR.swerveDatBoi(-0.8, 0.6);
-    motorRL.swerveDatBoi(-0.8, 0.6);
-    motorRR.swerveDatBoi(0.8, 0.6);
+    motorFL.swerveDatBoi(0.833, 0.552);
+    motorFR.swerveDatBoi(-0.833, 0.552);
+    motorRL.swerveDatBoi(-0.833, 0.552);
+    motorRR.swerveDatBoi(0.833, 0.552);
 
     double appliedSpeed = findSpeed(rightT, leftT);
 
@@ -173,10 +178,10 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
   }
 
   public void moveSwervePointTurn(double appliedSpeed) {
-    motorFL.swerveDatBoi(0.8, 0.6); //TODO: Check if these need to be swapped
-    motorFR.swerveDatBoi(-0.8, 0.6);
-    motorRL.swerveDatBoi(-0.8, 0.6);
-    motorRR.swerveDatBoi(0.8, 0.6);
+    motorFL.swerveDatBoi(0.833, 0.552); //TODO: Check if these need to be swapped
+    motorFR.swerveDatBoi(-0.833, 0.552);
+    motorRL.swerveDatBoi(-0.833, 0.552);
+    motorRR.swerveDatBoi(0.833, 0.552);
 
     frontLeftDriveMotor.set(ControlMode.PercentOutput, appliedSpeed);
     frontRightDriveMotor.set(ControlMode.PercentOutput, -appliedSpeed);
