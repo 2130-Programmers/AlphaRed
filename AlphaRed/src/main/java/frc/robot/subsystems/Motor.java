@@ -11,13 +11,14 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Motor {
 
-  private VictorSPX directionMotor;
+  private TalonSRX directionMotor;
 
   private Encoder encoder;
 
@@ -29,9 +30,9 @@ public class Motor {
   /**
    * Creates a new FrontLeftMotorSubsystem.
    */
-  public Motor(int victorCanId, int encoderPort1, int encoderPort2, int proxPortID) {
+  public Motor(int talonSRXCanId, int encoderPort1, int encoderPort2, int proxPortID) {
     
-    directionMotor = new VictorSPX(victorCanId);
+    directionMotor = new TalonSRX(talonSRXCanId);
 
     encoder = new Encoder(encoderPort1, encoderPort2);
 
@@ -94,6 +95,10 @@ public class Motor {
    * @param desiredTarget The value given as an "override" to the X's and Y's
    * 
    */
+
+  public void setInverted(boolean inverted) {
+    directionMotor.setInverted(inverted);
+  }
 
   public void swerveDatBoi(long desiredTarget) {
     if (encoderRemaining(desiredTarget, true) < Constants.smallSwerveRotationError) {
@@ -180,7 +185,7 @@ public class Motor {
 
   private long directionTargetValue(double x, double y) { 
 
-    directionTarget = -Math.round(105 * ( ( (piOverTwo() * (x*y)) / Math.abs(x*y) ) - Math.atan(y/x)) / piOverTwo());
+    directionTarget = Math.round(105 * ( ( (piOverTwo() * (x*y)) / Math.abs(x*y) ) - Math.atan(y/x)) / piOverTwo());
 
     return directionTarget;
 
@@ -206,10 +211,10 @@ public class Motor {
 
   public void findZero() {
     while(!proxValue()) {
-      moveMotor(1);
+      moveMotor(Constants.fastSwerveRotationSpeed);
     }
     zeroEncoder();
-    swerveDatBoi(104);
+    swerveDatBoi(0);
   }
 
 }

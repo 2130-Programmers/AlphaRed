@@ -8,17 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ControlPanelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class HandlerBooleanCommand extends CommandBase {
+public class DisengageStopBallSolenoid extends CommandBase {
   /**
-   * Creates a new HandlerBooleanCommand.
+   * Creates a new DisengageStopBallSolenoid.
    */
-  private ControlPanelSubsystem controlPanelSubsystem;
-  public HandlerBooleanCommand(ControlPanelSubsystem controlPanelSubsystem) {
-    this.controlPanelSubsystem = controlPanelSubsystem;
+
+  private IntakeSubsystem intakeSubsystem;
+
+  public DisengageStopBallSolenoid(IntakeSubsystem intakeSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.controlPanelSubsystem);
+    this.intakeSubsystem = intakeSubsystem;
+    addRequirements(this.intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +31,7 @@ public class HandlerBooleanCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    controlPanelSubsystem.setHandlerBoolean();
+    intakeSubsystem.releaseBalls();
   }
 
   // Called once the command ends or is interrupted.

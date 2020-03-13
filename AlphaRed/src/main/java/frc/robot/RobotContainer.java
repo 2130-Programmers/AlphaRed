@@ -87,7 +87,7 @@ public class RobotContainer {
   private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
   private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
   private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
-  private final JoystickButton operatorButtonStart = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
+  private final JoystickButton expelClimberButton = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
   private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonLeftJoyClick);
   private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonRightJoyClick);
 
@@ -114,7 +114,13 @@ public class RobotContainer {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
     operatorButtonB.whenPressed(climbMotorCommand, true);
-    operatorButtonX.whenPressed(climbSolenoidCom, true);
+    expelClimberButton.whenPressed(climbSolenoidCom, true);
+
+    operatorButtonX.whenPressed(flopIntakeInCommand, true);
+    operatorButtonY.whenPressed(flopIntakeOutCommand, true);
+
+
+
   }
 
   /**
