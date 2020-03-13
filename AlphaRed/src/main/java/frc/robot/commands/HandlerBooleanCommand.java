@@ -7,11 +7,8 @@
 
 package frc.robot.commands;
 
-import java.util.ResourceBundle.Control;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ControlPanelSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 
 public class HandlerBooleanCommand extends CommandBase {
   /**

@@ -8,18 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.ClimbingSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class ClimbMotorCom extends CommandBase {
+public class DisengageStopBallSolenoid extends CommandBase {
   /**
-   * Creates a new ClimbMotorCom.
+   * Creates a new DisengageStopBallSolenoid.
    */
-  private ClimbingSubsystem climbingSubsystem;
-  public ClimbMotorCom(ClimbingSubsystem climbingSubsystem) {
-    this.climbingSubsystem = climbingSubsystem;
-    addRequirements(this.climbingSubsystem);
+
+  private IntakeSubsystem intakeSubsystem;
+
+  public DisengageStopBallSolenoid(IntakeSubsystem intakeSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.intakeSubsystem = intakeSubsystem;
+    addRequirements(this.intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +31,7 @@ public class ClimbMotorCom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climbingSubsystem.runClimbMotor();
+    intakeSubsystem.releaseBalls();
   }
 
   // Called once the command ends or is interrupted.
@@ -41,10 +42,6 @@ public class ClimbMotorCom extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(RobotContainer.climbButtonValue() == true){
-      return false;
-    }else{
-      return true;
-    }
+    return false;
   }
 }

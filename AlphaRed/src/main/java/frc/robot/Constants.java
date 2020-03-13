@@ -16,45 +16,79 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    //-----------------------------------------------------------------------------\\
+    //                                                                             \\
+    //                           Swerve Related Constants                          \\
+    //                                                                             \\
+    //-----------------------------------------------------------------------------\\
+
     public static int largeSwerveRotationError = 10;
     public static int smallSwerveRotationError = 2;
     public static double slowSwerveRotationSpeed = 0.1;
     public static double fastSwerveRotationSpeed = 0.5;
+    public static double dirMMaxRotationOutput = 1;
+    public static double dirMMinRotationOutput = -1;
 
     public static int strafeEasyModeButton = 5;
     public static int pointTurnButon = 6;
 
     public static double pointSpeed = 0.2;
+
+    //-----------------------------------------------------------------------------\\
+    //                                                                             \\
+    //                          Handler Related Constants                          \\
+    //                                                                             \\
+    //-----------------------------------------------------------------------------\\
+
+    public static double handlerMotorSpeed = .1;
+
+    //-----------------------------------------------------------------------------\\
+    //                                                                             \\
+    //                         Driver Controller Constants                         \\
+    //                                                                             \\
+    //-----------------------------------------------------------------------------\\
   
     public static int driverButtonA = 1;
     public static int driverButtonB = 2;
     public static int driverButtonX = 3;
-    public static int driverButtonY = 4;
-    public static int driverButtonLB = 5;                   //Strafe Easy Mode Button
-    public static int driverButtonRB = 6;                   //Point Turn Button
+    public static int driverButtonY = 4;                    // Targeting Button                   - Held
+    public static int driverButtonLB = 5;                   // Strafe Easy Mode Button            - Held
+    public static int driverButtonRB = 6;                   // Point Turn Button                  - Held
     public static int driverButtonBack = 7;
     public static int driverButtonStart = 8;
     public static int driverButtonLeftJoyClick = 9;
     public static int driverButtonRightJoyClick = 10;
-    
 
-    public static int operatorButtonA = 1;
-    public static int operatorButtonB = 2;
-    public static int operatorButtonX = 3;
-    public static int operatorButtonY = 4;
-    public static int operatorButtonLB = 5;
-    public static int operatorButtonRB = 6;
-    public static int operatorButtonBack = 7;
-    public static int operatorButtonStart = 8;
+    public static int driverLeftAxisX = 0;
+    public static int driverLeftAxisY = 1;
+    public static int driverRightAxisX = 4;
+    public static int driverRightAxisY = 5;
+    public static int driverLeftAxisTrigger = 2;
+    public static int driverRightAxisTrigger = 3;
+
+    //-----------------------------------------------------------------------------\\
+    //                                                                             \\
+    //                        Operator Controller Constants                        \\
+    //                                                                             \\
+    //-----------------------------------------------------------------------------\\
+
+    public static int operatorButtonA = 1;                  // Wind Shooter Down Button           - Pressed
+    public static int operatorButtonB = 2;                  // Expel AND Retract Intake Button    - Pressed
+    public static int operatorButtonX = 3;                  // Run Intake Button                  - Held
+    public static int operatorButtonY = 4;                  // Wind Shooter Up Button             - Pressed
+    public static int operatorButtonLB = 5;                 // Lower Shooter Button               - Held
+    public static int operatorButtonRB = 6;                 // Raise Shooter Button               - Held
+    public static int operatorButtonBack = 7;               // Run Winch Button                   - Held
+    public static int operatorButtonStart = 8;              // Expel Climber Button               - Pressed
     public static int operatorButtonLeftJoyClick = 9;
     public static int operatorButtonRightJoyClick = 10;
+
+    public static int operatorLeftAxisX = 0;
+    public static int operatorLeftAxisY = 1;
+    public static int operatorRightAxisX = 4;
+    public static int operatorRightAxisY = 5;
+    public static int operatorLeftAxisTrigger = 2;
+    public static int operatorRightAxisTrigger = 3;
   
-    public static double handlerMotorSpeed = .1;
-  
-    public static int leftAxisX = 0;
-    public static int leftAxisY = 1;
-    public static int rightAxisX = 4;
-    public static int rightAxisY = 5;
-    public static int leftAxisTrigger = 2;
-    public static int rightAxisTrigger = 3;
 }

@@ -8,39 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LauncherPIDSubsystem;
+import frc.robot.subsystems.ClimbingSubsystem;
 
-public class LauncherCommand extends CommandBase {
+public class ExpelClimberCommand extends CommandBase {
   /**
-   * Creates a new LauncherCommand.
+   * Creates a new ExpelClimberCommand.
    */
-  private LauncherPIDSubsystem launcherPIDSubsystem;
-  public LauncherCommand(LauncherPIDSubsystem launcherPIDSubsystem) {
-    this.launcherPIDSubsystem = launcherPIDSubsystem;
-    addRequirements(this.launcherPIDSubsystem);
+  
+  private ClimbingSubsystem climbingSubsystem;
+
+  public ExpelClimberCommand(ClimbingSubsystem climbingSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+
+    this.climbingSubsystem = climbingSubsystem;
+    addRequirements(this.climbingSubsystem);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climbingSubsystem.putClimberUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcherPIDSubsystem.motorRun();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherPIDSubsystem.MotorStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

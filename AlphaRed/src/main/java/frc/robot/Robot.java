@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -58,6 +59,25 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    SmartDashboard.putNumber("FL Encoder", RobotContainer.swerveDrivePIDSubsystem.motorFL.encoderValue());
+    SmartDashboard.putNumber("FR Encoder", RobotContainer.swerveDrivePIDSubsystem.motorFR.encoderValue());
+    SmartDashboard.putNumber("RL Encoder", RobotContainer.swerveDrivePIDSubsystem.motorRL.encoderValue());
+    SmartDashboard.putNumber("RR Encoder", RobotContainer.swerveDrivePIDSubsystem.motorRR.encoderValue());
+
+    SmartDashboard.putNumber("FL Remaining", RobotContainer.swerveDrivePIDSubsystem.motorFL.encoderRemainingValue);
+    SmartDashboard.putNumber("FR Remaining", RobotContainer.swerveDrivePIDSubsystem.motorFR.encoderRemainingValue);
+    SmartDashboard.putNumber("RL Remaining", RobotContainer.swerveDrivePIDSubsystem.motorRL.encoderRemainingValue);
+    SmartDashboard.putNumber("RR Remaining", RobotContainer.swerveDrivePIDSubsystem.motorRR.encoderRemainingValue);
+
+    SmartDashboard.putNumber("FL Target", RobotContainer.swerveDrivePIDSubsystem.motorFL.directionTarget);
+    SmartDashboard.putNumber("FR Target", RobotContainer.swerveDrivePIDSubsystem.motorFR.directionTarget);
+    SmartDashboard.putNumber("RL Target", RobotContainer.swerveDrivePIDSubsystem.motorRL.directionTarget);
+    SmartDashboard.putNumber("RR Target", RobotContainer.swerveDrivePIDSubsystem.motorRR.directionTarget);
+
+    SmartDashboard.putBoolean("FL Prox", RobotContainer.swerveDrivePIDSubsystem.motorFL.proxValue());
+    SmartDashboard.putBoolean("FR Prox", RobotContainer.swerveDrivePIDSubsystem.motorFR.proxValue());
+    SmartDashboard.putBoolean("RL Prox", RobotContainer.swerveDrivePIDSubsystem.motorRL.proxValue());
+    SmartDashboard.putBoolean("RR Prox", RobotContainer.swerveDrivePIDSubsystem.motorRR.proxValue());
   }
 
   /**
@@ -71,6 +91,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    RobotContainer.swerveDrivePIDSubsystem.findAllZeros();
   }
 
   /**
@@ -89,13 +111,48 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    RobotContainer.swerveDrivePIDSubsystem.findAllZeros();
+
+    RobotContainer.climbingSubsystem.putClimberDown();
   }
 
   /**
+   * 
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
+
+    SmartDashboard.putNumber("FL Encoder", RobotContainer.swerveDrivePIDSubsystem.motorFL.encoderValue());
+    SmartDashboard.putNumber("FR Encoder", RobotContainer.swerveDrivePIDSubsystem.motorFR.encoderValue());
+    SmartDashboard.putNumber("RL Encoder", RobotContainer.swerveDrivePIDSubsystem.motorRL.encoderValue());
+    SmartDashboard.putNumber("RR Encoder", RobotContainer.swerveDrivePIDSubsystem.motorRR.encoderValue());
+
+    SmartDashboard.putNumber("FL Remaining", RobotContainer.swerveDrivePIDSubsystem.motorFL.encoderRemainingValue);
+    SmartDashboard.putNumber("FR Remaining", RobotContainer.swerveDrivePIDSubsystem.motorFR.encoderRemainingValue);
+    SmartDashboard.putNumber("RL Remaining", RobotContainer.swerveDrivePIDSubsystem.motorRL.encoderRemainingValue);
+    SmartDashboard.putNumber("RR Remaining", RobotContainer.swerveDrivePIDSubsystem.motorRR.encoderRemainingValue);
+
+    SmartDashboard.putNumber("FL Target", RobotContainer.swerveDrivePIDSubsystem.motorFL.directionTarget);
+    SmartDashboard.putNumber("FR Target", RobotContainer.swerveDrivePIDSubsystem.motorFR.directionTarget);
+    SmartDashboard.putNumber("RL Target", RobotContainer.swerveDrivePIDSubsystem.motorRL.directionTarget);
+    SmartDashboard.putNumber("RR Target", RobotContainer.swerveDrivePIDSubsystem.motorRR.directionTarget);
+
+    SmartDashboard.putBoolean("FL Prox", RobotContainer.swerveDrivePIDSubsystem.motorFL.proxValue());
+    SmartDashboard.putBoolean("FR Prox", RobotContainer.swerveDrivePIDSubsystem.motorFR.proxValue());
+    SmartDashboard.putBoolean("RL Prox", RobotContainer.swerveDrivePIDSubsystem.motorRL.proxValue());
+    SmartDashboard.putBoolean("RR Prox", RobotContainer.swerveDrivePIDSubsystem.motorRR.proxValue());
+
+    SmartDashboard.putNumber("X Value", RobotContainer.getDriverAxis(0));
+    SmartDashboard.putNumber("Y Value", RobotContainer.getDriverAxis(1));
+
+    SmartDashboard.putNumber("Limelight X", RobotContainer.sensorsSubsystem.x);
+    SmartDashboard.putNumber("Limelight Y", RobotContainer.sensorsSubsystem.y);
+    SmartDashboard.putNumber("LimelightArea", RobotContainer.sensorsSubsystem.area);
+
+    RobotContainer.swerveDrivePIDSubsystem.invertTheMotors();
+    RobotContainer.swerveDrivePIDSubsystem.zeroAllEncodersBasedOnProx();
   }
 
   @Override

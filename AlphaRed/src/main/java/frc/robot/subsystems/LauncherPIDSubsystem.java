@@ -7,43 +7,51 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import frc.robot.RobotContainer;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import frc.robot.RobotContainer;
 
-public class LauncherSubsystem extends SubsystemBase {
-  /**
-   * Creates a new LauncherSubsystem.
-   */
+public class LauncherPIDSubsystem extends PIDSubsystem {
+
   private CANSparkMax launcherMotorMaster;
   private CANSparkMax launcherMotorSlave;
   private TalonSRX aimingMotor;
 
-  
-  public double joyVal;
-  public double joyValPrev;
   public double finalSpeed;
 
-  public LauncherSubsystem() {
+  /**
+   * Creates a new LauncherPIDSubsystem.
+   */
+  public LauncherPIDSubsystem() {
+    super(
+        // The PIDController used by the subsystem
+        new PIDController(0, 0, 0));
+
     launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
     launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
 
-    joyValPrev = 0;
+    aimingMotor = new TalonSRX(11);
+
     finalSpeed = 0;
 
     setMasterMotor();
   }
 
   @Override
-  public void periodic() {
-    joyVal = RobotContainer.getDriverAxis(2);
-    setMaster();
-    // This method will be called once per scheduler run
+  public void useOutput(double output, double setpoint) {
+    // Use the output here
+    aimingMotor.set(ControlMode.PercentOutput, output);
+  }
+
+  @Override
+  public double getMeasurement() {
+    // Return the process variable measurement here
+    return RobotContainer.sensorsSubsystem.linearEncoderValue;
   }
 
   public void setMaster(){
@@ -63,7 +71,7 @@ public class LauncherSubsystem extends SubsystemBase {
     //getting input from left trigger using getdriveraxis method and check value -cory
     if (RobotContainer.getDriverAxis(2) > .01) {
       //setting speed for sparkMax motor controllers -cory
-      launcherMotorMaster.set(finalSpeed);
+      launcherMotorMaster.set(finalSpeed); //TODO: Give it power?
     } else {
       MotorStop();
     }
@@ -72,5 +80,4 @@ public class LauncherSubsystem extends SubsystemBase {
   public void setMasterMotor() {
     launcherMotorSlave.follow(launcherMotorMaster);
   }
-
 }
