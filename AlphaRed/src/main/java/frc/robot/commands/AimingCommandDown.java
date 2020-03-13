@@ -9,16 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.LauncherPIDSubsystem;
+import frc.robot.subsystems.AimingSubsystem;
 
-public class LauncherCommand extends CommandBase {
+public class AimingCommandDown extends CommandBase {
   /**
-   * Creates a new LauncherCommand.
+   * Creates a new AimingCommandDown.
    */
-  private LauncherPIDSubsystem launcherPIDSubsystem;
-  public LauncherCommand(LauncherPIDSubsystem launcherPIDSubsystem) {
-    this.launcherPIDSubsystem = launcherPIDSubsystem;
-    addRequirements(this.launcherPIDSubsystem);
+  private AimingSubsystem aimingSubsystem;
+  public AimingCommandDown(AimingSubsystem aimingSubsystem) {
+    this.aimingSubsystem = aimingSubsystem;
+    addRequirements(this.aimingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -30,18 +30,18 @@ public class LauncherCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcherPIDSubsystem.motorRun();
+    aimingSubsystem.lowerIntake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherPIDSubsystem.MotorStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.launcherStopButVal();
+    return !RobotContainer.lowerButVal();
+    
   }
 }

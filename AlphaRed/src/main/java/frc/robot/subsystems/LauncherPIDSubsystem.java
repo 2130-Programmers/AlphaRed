@@ -20,9 +20,9 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
 
   private CANSparkMax launcherMotorMaster;
   private CANSparkMax launcherMotorSlave;
-  private TalonSRX aimingMotor;
 
   public double finalSpeed;
+  public boolean active;
 
   /**
    * Creates a new LauncherPIDSubsystem.
@@ -35,17 +35,18 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
     launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
     launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
 
-    aimingMotor = new TalonSRX(11);
+   // aimingMotor = new TalonSRX(11);
 
     finalSpeed = 0;
+    active = false;
 
-    setMasterMotor();
+    setMaster();
   }
 
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    aimingMotor.set(ControlMode.PercentOutput, output);
+    //aimingMotor.set(ControlMode.PercentOutput, output);
   }
 
   @Override
@@ -68,16 +69,19 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
   }
 
   public void motorRun() {
-    //getting input from left trigger using getdriveraxis method and check value -cory
-    if (RobotContainer.getDriverAxis(2) > .01) {
-      //setting speed for sparkMax motor controllers -cory
-      launcherMotorMaster.set(finalSpeed); //TODO: Give it power?
-    } else {
-      MotorStop();
+    if(active==true){
+      finalSpeed+=0.15;
+    }else{
+      finalSpeed=0;
     }
+    launcherMotorMaster.set(finalSpeed); 
   }
 
-  public void setMasterMotor() {
-    launcherMotorSlave.follow(launcherMotorMaster);
+  public void isActive(){
+    if(RobotContainer.launcherButVal()){
+      active = true;
+    }else if(RobotContainer.launcherStopButVal()){
+      active = false;
+    }
   }
 }

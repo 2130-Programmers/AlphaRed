@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.LauncherCommand;
+import frc.robot.commands.AimingCommand;
+import frc.robot.commands.AimingCommandDown;
 import frc.robot.commands.ChangeHandlerPositionCommand;
 import frc.robot.commands.ClimbMotorCommand;
 import frc.robot.commands.ClimbSolenoidCom;
@@ -23,6 +25,7 @@ import frc.robot.commands.HandlerBooleanCommand;
 import frc.robot.commands.HandlerMotorCommand;
 import frc.robot.commands.PointTurnCommand;
 import frc.robot.commands.StrafeEasyModeCommand;
+import frc.robot.subsystems.AimingSubsystem;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -44,7 +47,10 @@ public class RobotContainer {
   public static final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
   public static final SwerveDrivePIDSubsystem swerveDrivePIDSubsystem = new SwerveDrivePIDSubsystem();
+  public static final AimingSubsystem aimingSubsystem = new AimingSubsystem();
 
+  private final AimingCommandDown aimingCommandDown = new AimingCommandDown(aimingSubsystem);
+  private final AimingCommand aimingCommand = new AimingCommand(aimingSubsystem);
   private final LauncherCommand launcherCommand = new LauncherCommand(launcherPIDSubsystem);
   private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDrivePIDSubsystem);
   private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDrivePIDSubsystem);
@@ -80,16 +86,20 @@ public class RobotContainer {
 
   private static final Joystick operatorJoystick = new Joystick(1);
 
-  private final static JoystickButton changeHandlerPositionButton = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
-  private final static JoystickButton climbMotorActivationButton = new JoystickButton(operatorJoystick,Constants.operatorButtonB);
-  private final JoystickButton flopIntakeInButton = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
-  private final JoystickButton flopIntakeOutButton = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
-  private final JoystickButton operatorButtonLB = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
-  private final JoystickButton operatorButtonRB = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
-  private final JoystickButton operatorButtonBack = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
+  private final static JoystickButton changeHandlerPositionButton = new JoystickButton(operatorJoystick, Constants.operatorButtonRightJoyClick);
+  private final static JoystickButton windLauncherUpButton = new JoystickButton(operatorJoystick, Constants.operatorButtonX);
+  private final static JoystickButton windLauncherDownButton = new JoystickButton(operatorJoystick, Constants.operatorButtonY);
+  private final JoystickButton flopIntakeInButton = new JoystickButton(operatorJoystick, Constants.operatorButtonA);
+  private final JoystickButton flopIntakeOutButton = new JoystickButton(operatorJoystick, Constants.operatorButtonB);
+  private final static JoystickButton lowerLauncherButton  = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
+  private final static JoystickButton raiseLauncherButton = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
+  private final static JoystickButton runWinchButton = new JoystickButton(operatorJoystick,
+      Constants.operatorButtonBack);
   private final JoystickButton expelClimberButton = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
-  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonLeftJoyClick);
-  private final JoystickButton operatorButtonRightJoyClick = new JoystickButton(operatorJoystick, Constants.operatorButtonRightJoyClick);
+  private final JoystickButton runClimberMotorButton = new JoystickButton(operatorJoystick,
+      Constants.operatorButtonStart);
+  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick,
+      Constants.operatorButtonLeftJoyClick);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -102,6 +112,8 @@ public class RobotContainer {
     swerveDrivePIDSubsystem.setDefaultCommand(driveSwerveCommand);
     intakeSubsystem.setDefaultCommand(flopIntakeInCommand);
     controlPanelSubsystem.setDefaultCommand(changeHandlerPositionCommand);
+    aimingSubsystem.setDefaultCommand(aimingCommand);
+    
   }
 
   /**
@@ -113,14 +125,19 @@ public class RobotContainer {
   private void configureButtonBindings() {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
-    climbMotorActivationButton.whenPressed(climbMotorCommand, true);
+
+    runClimberMotorButton.whenPressed(climbMotorCommand, true);
     expelClimberButton.whenPressed(climbSolenoidCom, true);
-    changeHandlerPositionButton.whenPressed(changeHandlerPositionCommand);
+
+    changeHandlerPositionButton.whenPressed(changeHandlerPositionCommand, true);
 
     flopIntakeInButton.whenPressed(flopIntakeInCommand, true);
     flopIntakeOutButton.whenPressed(flopIntakeOutCommand, true);
 
+    windLauncherUpButton.whenPressed(launcherCommand, true);
 
+    raiseLauncherButton.whenPressed(aimingCommand, true);
+    lowerLauncherButton.whenPressed(aimingCommandDown, true);
 
   }
 
@@ -154,9 +171,22 @@ public class RobotContainer {
     return changeHandlerPositionButton.get();
   }
 
-  public static boolean climbButtonValue(){
-    return climbMotorActivationButton.get();
+  public static boolean climbButtonValue() {
+    return runWinchButton.get();
   }
 
+  public static boolean launcherButVal(){
+    return windLauncherUpButton.get();
+  }
 
+  public static boolean launcherStopButVal(){
+    return windLauncherDownButton.get();
+  }
+
+  public static boolean lowerButVal(){
+    return lowerLauncherButton.get();
+  }
+  public static boolean raiseButVal(){
+    return raiseLauncherButton.get();
+  }
 }
