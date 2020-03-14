@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class DisengageStopBallSolenoid extends CommandBase {
@@ -37,11 +38,12 @@ public class DisengageStopBallSolenoid extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intakeSubsystem.stopBalls();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return !RobotContainer.disengageStopBallSoneloidButtonValue();
   }
 }

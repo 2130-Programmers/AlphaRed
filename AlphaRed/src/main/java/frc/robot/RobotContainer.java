@@ -18,6 +18,7 @@ import frc.robot.commands.AimingCommandDown;
 import frc.robot.commands.ChangeHandlerPositionCommand;
 import frc.robot.commands.ClimbMotorCommand;
 import frc.robot.commands.ClimbSolenoidCom;
+import frc.robot.commands.DisengageStopBallSolenoid;
 import frc.robot.commands.DriveSwerveCommand;
 import frc.robot.commands.FlopIntakeInCommand;
 import frc.robot.commands.FlopIntakeOutCommand;
@@ -62,6 +63,7 @@ public class RobotContainer {
   private final HandlerMotorCommand handlerMotorCommand = new HandlerMotorCommand(controlPanelSubsystem);
   private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
   private final ClimbMotorCommand climbMotorCommand = new ClimbMotorCommand(climbingSubsystem);
+  private final DisengageStopBallSolenoid disengageStopBallSolenoid = new DisengageStopBallSolenoid(intakeSubsystem);
 
   /**
    * The Driver Joystick declaration and the button definitions associated with it.
@@ -93,13 +95,9 @@ public class RobotContainer {
   private final JoystickButton flopIntakeOutButton = new JoystickButton(operatorJoystick, Constants.operatorButtonB);
   private final static JoystickButton lowerLauncherButton  = new JoystickButton(operatorJoystick, Constants.operatorButtonLB);
   private final static JoystickButton raiseLauncherButton = new JoystickButton(operatorJoystick, Constants.operatorButtonRB);
-  private final static JoystickButton runWinchButton = new JoystickButton(operatorJoystick,
-      Constants.operatorButtonBack);
+  private final static JoystickButton runWinchButton = new JoystickButton(operatorJoystick, Constants.operatorButtonBack);
   private final JoystickButton expelClimberButton = new JoystickButton(operatorJoystick, Constants.operatorButtonStart);
-  private final JoystickButton runClimberMotorButton = new JoystickButton(operatorJoystick,
-      Constants.operatorButtonStart);
-  private final JoystickButton operatorButtonLeftJoyClick = new JoystickButton(operatorJoystick,
-      Constants.operatorButtonLeftJoyClick);
+  private final static JoystickButton disengageStopBallSoneloidButton = new JoystickButton(operatorJoystick, Constants.operatorButtonLeftJoyClick);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -108,11 +106,9 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    launcherPIDSubsystem.setDefaultCommand(launcherCommand);
     swerveDrivePIDSubsystem.setDefaultCommand(driveSwerveCommand);
     intakeSubsystem.setDefaultCommand(flopIntakeInCommand);
     controlPanelSubsystem.setDefaultCommand(changeHandlerPositionCommand);
-    aimingSubsystem.setDefaultCommand(aimingCommand);
     
   }
 
@@ -126,7 +122,7 @@ public class RobotContainer {
     pointTurnButton.whileHeld(pointTurnCommand, true);
     strafeEasyModeButton.whileHeld(strafeEasyModeCommand, true);
 
-    runClimberMotorButton.whenPressed(climbMotorCommand, true);
+    runWinchButton.whenPressed(climbMotorCommand, true);
     expelClimberButton.whenPressed(climbSolenoidCom, true);
 
     changeHandlerPositionButton.whenPressed(changeHandlerPositionCommand, true);
@@ -139,6 +135,7 @@ public class RobotContainer {
     raiseLauncherButton.whenPressed(aimingCommand, true);
     lowerLauncherButton.whenPressed(aimingCommandDown, true);
 
+    disengageStopBallSoneloidButton.whenPressed(disengageStopBallSolenoid, true);
   }
 
   /**
@@ -188,5 +185,9 @@ public class RobotContainer {
   }
   public static boolean raiseButVal(){
     return raiseLauncherButton.get();
+  }
+
+  public static boolean disengageStopBallSoneloidButtonValue() {
+    return disengageStopBallSoneloidButton.get();
   }
 }

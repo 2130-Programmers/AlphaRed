@@ -39,4 +39,7 @@ public class AimingSubsystem extends SubsystemBase {
     aimingMotor.configPeakOutputForward(1);
     aimingMotor.configPeakOutputReverse(-1);
   }
+  public void killMotors() {
+    aimingMotor.set(ControlMode.PercentOutput, 0);
+  }
 }

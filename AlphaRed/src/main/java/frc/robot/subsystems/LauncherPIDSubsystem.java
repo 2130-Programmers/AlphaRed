@@ -62,6 +62,7 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
   public void MotorStop() {
     //setting speed for sparkMax motor controllers -cory
     launcherMotorMaster.set(0);
+    finalSpeed = 0;
   }
 
   public final void finalSpeedReset() {
@@ -69,19 +70,7 @@ public class LauncherPIDSubsystem extends PIDSubsystem {
   }
 
   public void motorRun() {
-    if(active==true){
-      finalSpeed+=0.15;
-    }else{
-      finalSpeed=0;
-    }
+    finalSpeed+=0.01;
     launcherMotorMaster.set(finalSpeed); 
-  }
-
-  public void isActive(){
-    if(RobotContainer.launcherButVal()){
-      active = true;
-    }else if(RobotContainer.launcherStopButVal()){
-      active = false;
-    }
   }
 }
