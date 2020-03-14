@@ -42,10 +42,6 @@ public class ClimbMotorCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(RobotContainer.climbButtonValue() == true){
-      return false;
-    }else{
-      return true;
-    }
+    return !RobotContainer.climbButtonValue();
   }
 }

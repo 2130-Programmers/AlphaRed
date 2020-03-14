@@ -49,7 +49,7 @@ public final class Constants {
     //                                                                             \\
     //-----------------------------------------------------------------------------\\
   
-    public static int driverButtonA = 1;
+    public static int driverButtonA = 1;                    // Target With Limelight Button       - Held
     public static int driverButtonB = 2;
     public static int driverButtonX = 3;
     public static int driverButtonY = 4;                    // Targeting Button                   - Held
@@ -73,16 +73,16 @@ public final class Constants {
     //                                                                             \\
     //-----------------------------------------------------------------------------\\
 
-    public static int operatorButtonA = 1;                  // Wind Shooter Down Button           - Pressed
-    public static int operatorButtonB = 2;                  // Expel AND Retract Intake Button    - Pressed
-    public static int operatorButtonX = 3;                  // Run Intake Button                  - Held
-    public static int operatorButtonY = 4;                  // Wind Shooter Up Button             - Pressed
+    public static int operatorButtonA = 1;                  // Expel Intake Button                - Pressed
+    public static int operatorButtonB = 2;                  // Retract Intake Button              - Pressed
+    public static int operatorButtonX = 3;                  // Wind Shooter Up Button             - Held
+    public static int operatorButtonY = 4;                  // Wind Shooter Down Button           - Pressed
     public static int operatorButtonLB = 5;                 // Lower Shooter Button               - Held
     public static int operatorButtonRB = 6;                 // Raise Shooter Button               - Held
     public static int operatorButtonBack = 7;               // Run Winch Button                   - Held
     public static int operatorButtonStart = 8;              // Expel Climber Button               - Pressed
-    public static int operatorButtonLeftJoyClick = 9;
-    public static int operatorButtonRightJoyClick = 10;
+    public static int operatorButtonLeftJoyClick = 9;       
+    public static int operatorButtonRightJoyClick = 10;     // Control Panel Button               - Pressed
 
     public static int operatorLeftAxisX = 0;
     public static int operatorLeftAxisY = 1;

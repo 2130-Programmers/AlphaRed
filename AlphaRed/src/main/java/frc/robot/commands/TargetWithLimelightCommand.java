@@ -8,42 +8,49 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.SensorsSubsystem;
+import frc.robot.subsystems.SwerveDrivePIDSubsystem;
 
-public class DisengageStopBallSolenoid extends CommandBase {
+public class TargetWithLimelightCommand extends CommandBase {
   /**
-   * Creates a new DisengageStopBallSolenoid.
+   * Creates a new TargetWithLimelightCommand.
    */
 
-  private IntakeSubsystem intakeSubsystem;
+  private SensorsSubsystem sensorsSubsystem;
+  private SwerveDrivePIDSubsystem swerveDrivePIDSubsystem;
 
-  public DisengageStopBallSolenoid(IntakeSubsystem intakeSubsystem) {
+  public TargetWithLimelightCommand(SensorsSubsystem sensorsSubsystem, SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intakeSubsystem = intakeSubsystem;
-    addRequirements(this.intakeSubsystem);
+
+    this.sensorsSubsystem = sensorsSubsystem;
+    this.swerveDrivePIDSubsystem = swerveDrivePIDSubsystem;
+    addRequirements(this.swerveDrivePIDSubsystem);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.releaseBalls();
+    swerveDrivePIDSubsystem.setSetpoint(sensorsSubsystem.x);
+    swerveDrivePIDSubsystem.enable();
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSubsystem.stopBalls();
+    swerveDrivePIDSubsystem.stopPID();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !RobotContainer.disengageStopBallSoneloidButtonValue();
+    return false;
   }
 }

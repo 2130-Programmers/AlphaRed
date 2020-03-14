@@ -9,19 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.AimingSubsystem;
 
-public class DisengageStopBallSolenoid extends CommandBase {
+public class AimingCommand extends CommandBase {
   /**
-   * Creates a new DisengageStopBallSolenoid.
+   * Creates a new AimingCommand.
    */
-
-  private IntakeSubsystem intakeSubsystem;
-
-  public DisengageStopBallSolenoid(IntakeSubsystem intakeSubsystem) {
+  private AimingSubsystem aimingSubsystem;
+  public AimingCommand(AimingSubsystem aimingSubsystem) {
+    this.aimingSubsystem = aimingSubsystem;
+    addRequirements(this.aimingSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intakeSubsystem = intakeSubsystem;
-    addRequirements(this.intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -32,18 +30,19 @@ public class DisengageStopBallSolenoid extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.releaseBalls();
+    aimingSubsystem.raiseIntake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSubsystem.stopBalls();
+    aimingSubsystem.killMotors();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !RobotContainer.disengageStopBallSoneloidButtonValue();
+    return !RobotContainer.raiseButVal();
+    
   }
 }
