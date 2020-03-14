@@ -26,6 +26,7 @@ import frc.robot.commands.HandlerBooleanCommand;
 import frc.robot.commands.HandlerMotorCommand;
 import frc.robot.commands.PointTurnCommand;
 import frc.robot.commands.StrafeEasyModeCommand;
+import frc.robot.commands.TargetWithLimelightCommand;
 import frc.robot.subsystems.AimingSubsystem;
 import frc.robot.subsystems.ClimbingSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
@@ -64,6 +65,7 @@ public class RobotContainer {
   private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
   private final ClimbMotorCommand climbMotorCommand = new ClimbMotorCommand(climbingSubsystem);
   private final DisengageStopBallSolenoid disengageStopBallSolenoid = new DisengageStopBallSolenoid(intakeSubsystem);
+  private final TargetWithLimelightCommand targetWithLimelightCommand = new TargetWithLimelightCommand(sensorsSubsystem, swerveDrivePIDSubsystem);
 
   /**
    * The Driver Joystick declaration and the button definitions associated with it.
@@ -71,7 +73,7 @@ public class RobotContainer {
 
   private static final Joystick driverJoystick = new Joystick(0);
   
-  private final JoystickButton driverButtonA = new JoystickButton(driverJoystick, Constants.driverButtonA);
+  private final JoystickButton targetWithLimelightButton = new JoystickButton(driverJoystick, Constants.driverButtonA);
   private final JoystickButton driverButtonB = new JoystickButton(driverJoystick, Constants.driverButtonB);
   private final JoystickButton driverButtonX = new JoystickButton(driverJoystick, Constants.driverButtonX);
   private final JoystickButton driverButtonY = new JoystickButton(driverJoystick, Constants.driverButtonY);
@@ -136,6 +138,8 @@ public class RobotContainer {
     lowerLauncherButton.whenPressed(aimingCommandDown, true);
 
     disengageStopBallSoneloidButton.whenPressed(disengageStopBallSolenoid, true);
+
+    targetWithLimelightButton.whileHeld(targetWithLimelightCommand);
   }
 
   /**

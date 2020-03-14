@@ -133,6 +133,11 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
     return (positive - negitive)/2;
   }
 
+  public void stopPID() {
+    disable();
+    moveSwerveAxis(0, 0, 0, 0, 0, 0);
+  }
+
   private void moveDriveMotors(double frontSpeed, double rearSpeed) {
     frontLeftDriveMotor.set(ControlMode.PercentOutput, frontSpeed);
     frontRightDriveMotor.set(ControlMode.PercentOutput, frontSpeed);

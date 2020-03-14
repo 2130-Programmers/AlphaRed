@@ -49,7 +49,7 @@ public final class Constants {
     //                                                                             \\
     //-----------------------------------------------------------------------------\\
   
-    public static int driverButtonA = 1;
+    public static int driverButtonA = 1;                    // Target With Limelight Button       - Held
     public static int driverButtonB = 2;
     public static int driverButtonX = 3;
     public static int driverButtonY = 4;                    // Targeting Button                   - Held
