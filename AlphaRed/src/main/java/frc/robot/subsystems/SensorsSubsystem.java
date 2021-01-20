@@ -15,41 +15,40 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SensorsSubsystem extends SubsystemBase {
 
-  private NetworkTable limelightTable;
-  private NetworkTableEntry tx;
-  private NetworkTableEntry ty;
-  private NetworkTableEntry ta;
+    private NetworkTable limelightTable;
+    private NetworkTableEntry tx;
+    private NetworkTableEntry ty;
+    private NetworkTableEntry ta;
 
-  public double x;
-  public double y;
-  public double area;
-  public double linearEncoderValue;
+    public double x;
+    public double y;
+    public double area;
+    public double linearEncoderValue;
 
-  public AnalogPotentiometer linearEncoder;
-  
+    public AnalogPotentiometer linearEncoder;
 
-  /**
-   * Creates a new SensorsSubsystem.
-   */
-  public SensorsSubsystem() {
-    limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    /**
+     * Creates a new SensorsSubsystem.
+     */
+    public SensorsSubsystem() {
+        limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-    tx = limelightTable.getEntry("tx");
-    ty = limelightTable.getEntry("ty");
-    ta = limelightTable.getEntry("ta");
+        tx = limelightTable.getEntry("tx");
+        ty = limelightTable.getEntry("ty");
+        ta = limelightTable.getEntry("ta");
 
-    linearEncoder = new AnalogPotentiometer(0);
-  }
+        linearEncoder = new AnalogPotentiometer(0);
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
 
-    x = tx.getDouble(0.0);
-    y = ty.getDouble(0.0);
-    area = ta.getDouble(0.0);
+        x = tx.getDouble(0.0);
+        y = ty.getDouble(0.0);
+        area = ta.getDouble(0.0);
 
-    linearEncoderValue = linearEncoder.get();
+        linearEncoderValue = linearEncoder.get();
 
-  }
+    }
 }

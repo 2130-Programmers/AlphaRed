@@ -12,37 +12,38 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.LauncherPIDSubsystem;
 
 public class LauncherCommand extends CommandBase {
-  /**
-   * Creates a new LauncherCommand.
-   */
-  private LauncherPIDSubsystem launcherPIDSubsystem;
-  public LauncherCommand(LauncherPIDSubsystem launcherPIDSubsystem) {
-    this.launcherPIDSubsystem = launcherPIDSubsystem;
-    addRequirements(this.launcherPIDSubsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    /**
+     * Creates a new LauncherCommand.
+     */
+    private LauncherPIDSubsystem launcherPIDSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    public LauncherCommand(LauncherPIDSubsystem launcherPIDSubsystem) {
+        this.launcherPIDSubsystem = launcherPIDSubsystem;
+        addRequirements(this.launcherPIDSubsystem);
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    launcherPIDSubsystem.motorRun();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    launcherPIDSubsystem.MotorStop();
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        launcherPIDSubsystem.motorRun();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  
-  public boolean isFinished() {
-    return RobotContainer.launcherStopButVal();
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        launcherPIDSubsystem.MotorStop();
+    }
+
+    // Returns true when the command should end.
+    @Override
+
+    public boolean isFinished() {
+        return RobotContainer.launcherStopButVal();
+    }
 }

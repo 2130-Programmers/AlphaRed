@@ -18,59 +18,59 @@ import frc.robot.RobotContainer;
 
 public class LauncherPIDSubsystem extends PIDSubsystem {
 
-  private CANSparkMax launcherMotorMaster;
-  private CANSparkMax launcherMotorSlave;
+    private CANSparkMax launcherMotorMaster;
+    private CANSparkMax launcherMotorSlave;
 
-  public double finalSpeed;
-  public boolean active;
+    public double finalSpeed;
+    public boolean active;
 
-  /**
-   * Creates a new LauncherPIDSubsystem.
-   */
-  public LauncherPIDSubsystem() {
-    super(
-        // The PIDController used by the subsystem
-        new PIDController(0, 0, 0));
+    /**
+     * Creates a new LauncherPIDSubsystem.
+     */
+    public LauncherPIDSubsystem() {
+        super(
+                // The PIDController used by the subsystem
+                new PIDController(0, 0, 0));
 
-    launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
-    launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
+        launcherMotorMaster = new CANSparkMax(13, MotorType.kBrushless);
+        launcherMotorSlave = new CANSparkMax(14, MotorType.kBrushless);
 
-   // aimingMotor = new TalonSRX(11);
+        // aimingMotor = new TalonSRX(11);
 
-    finalSpeed = 0;
-    active = false;
+        finalSpeed = 0;
+        active = false;
 
-    setMaster();
-  }
+        setMaster();
+    }
 
-  @Override
-  public void useOutput(double output, double setpoint) {
-    // Use the output here
-    //aimingMotor.set(ControlMode.PercentOutput, output);
-  }
+    @Override
+    public void useOutput(double output, double setpoint) {
+        // Use the output here
+        // aimingMotor.set(ControlMode.PercentOutput, output);
+    }
 
-  @Override
-  public double getMeasurement() {
-    // Return the process variable measurement here
-    return RobotContainer.sensorsSubsystem.linearEncoderValue;
-  }
+    @Override
+    public double getMeasurement() {
+        // Return the process variable measurement here
+        return RobotContainer.sensorsSubsystem.linearEncoderValue;
+    }
 
-  public void setMaster(){
-    launcherMotorSlave.follow(launcherMotorMaster);
-  }
+    public void setMaster() {
+        launcherMotorSlave.follow(launcherMotorMaster);
+    }
 
-  public void MotorStop() {
-    //setting speed for sparkMax motor controllers -cory
-    launcherMotorMaster.set(0);
-    finalSpeed = 0;
-  }
+    public void MotorStop() {
+        // setting speed for sparkMax motor controllers -cory
+        launcherMotorMaster.set(0);
+        finalSpeed = 0;
+    }
 
-  public final void finalSpeedReset() {
-    finalSpeed = 0;
-  }
+    public final void finalSpeedReset() {
+        finalSpeed = 0;
+    }
 
-  public void motorRun() {
-    finalSpeed+=0.01;
-    launcherMotorMaster.set(finalSpeed); 
-  }
+    public void motorRun() {
+        finalSpeed += 0.01;
+        launcherMotorMaster.set(finalSpeed);
+    }
 }

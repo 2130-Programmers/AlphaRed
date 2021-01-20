@@ -12,37 +12,38 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.AimingSubsystem;
 
 public class AimingCommand extends CommandBase {
-  /**
-   * Creates a new AimingCommand.
-   */
-  private AimingSubsystem aimingSubsystem;
-  public AimingCommand(AimingSubsystem aimingSubsystem) {
-    this.aimingSubsystem = aimingSubsystem;
-    addRequirements(this.aimingSubsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    /**
+     * Creates a new AimingCommand.
+     */
+    private AimingSubsystem aimingSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    public AimingCommand(AimingSubsystem aimingSubsystem) {
+        this.aimingSubsystem = aimingSubsystem;
+        addRequirements(this.aimingSubsystem);
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    aimingSubsystem.raiseIntake();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    aimingSubsystem.killMotors();
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        aimingSubsystem.raiseIntake();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !RobotContainer.raiseButVal();
-    
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        aimingSubsystem.killMotors();
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return !RobotContainer.raiseButVal();
+
+    }
 }

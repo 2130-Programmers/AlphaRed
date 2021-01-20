@@ -10,42 +10,42 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.SwerveDrivePIDSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class StrafeEasyModeCommand extends CommandBase {
 
-  private SwerveDrivePIDSubsystem swerveDrivePIDSubsystem;
+    private DriveTrainSubsystem driveTrainSubsystem;
 
-  /**
-   * Creates a new StrafeEasyModeCommand.
-   */
-  public StrafeEasyModeCommand(SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
+    /**
+     * Creates a new StrafeEasyModeCommand.
+     */
+    public StrafeEasyModeCommand(DriveTrainSubsystem driveTrainSubsystem) {
+        // Use addRequirements() here to declare subsystem dependencies.
 
-    this.swerveDrivePIDSubsystem = swerveDrivePIDSubsystem;
-    addRequirements(this.swerveDrivePIDSubsystem);
-  }
+        this.driveTrainSubsystem = driveTrainSubsystem;
+        addRequirements(this.driveTrainSubsystem);
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    swerveDrivePIDSubsystem.moveSwerveStrafe(RobotContainer.getDriverAxis(Constants.driverLeftAxisTrigger),
-                                             RobotContainer.getDriverAxis(Constants.driverRightAxisTrigger));
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        driveTrainSubsystem.moveSwerveStrafe(RobotContainer.getDriverAxis(Constants.driverLeftAxisTrigger),
+                RobotContainer.getDriverAxis(Constants.driverRightAxisTrigger));
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

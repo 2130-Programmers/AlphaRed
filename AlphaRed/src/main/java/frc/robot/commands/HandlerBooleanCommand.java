@@ -11,35 +11,36 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ControlPanelSubsystem;
 
 public class HandlerBooleanCommand extends CommandBase {
-  /**
-   * Creates a new HandlerBooleanCommand.
-   */
-  private ControlPanelSubsystem controlPanelSubsystem;
-  public HandlerBooleanCommand(ControlPanelSubsystem controlPanelSubsystem) {
-    this.controlPanelSubsystem = controlPanelSubsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.controlPanelSubsystem);
-  }
+    /**
+     * Creates a new HandlerBooleanCommand.
+     */
+    private ControlPanelSubsystem controlPanelSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    public HandlerBooleanCommand(ControlPanelSubsystem controlPanelSubsystem) {
+        this.controlPanelSubsystem = controlPanelSubsystem;
+        // Use addRequirements() here to declare subsystem dependencies.
+        addRequirements(this.controlPanelSubsystem);
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    controlPanelSubsystem.setHandlerBoolean();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        controlPanelSubsystem.setHandlerBoolean();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

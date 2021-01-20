@@ -11,40 +11,40 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimbingSubsystem;
 
 public class ExpelClimberCommand extends CommandBase {
-  /**
-   * Creates a new ExpelClimberCommand.
-   */
-  
-  private ClimbingSubsystem climbingSubsystem;
+    /**
+     * Creates a new ExpelClimberCommand.
+     */
 
-  public ExpelClimberCommand(ClimbingSubsystem climbingSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
+    private ClimbingSubsystem climbingSubsystem;
 
-    this.climbingSubsystem = climbingSubsystem;
-    addRequirements(this.climbingSubsystem);
+    public ExpelClimberCommand(ClimbingSubsystem climbingSubsystem) {
+        // Use addRequirements() here to declare subsystem dependencies.
 
-  }
+        this.climbingSubsystem = climbingSubsystem;
+        addRequirements(this.climbingSubsystem);
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    climbingSubsystem.putClimberUp();
-  }
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        climbingSubsystem.putClimberUp();
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    climbingSubsystem.putClimberDown();
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        climbingSubsystem.putClimberDown();
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return true;
+    }
 }

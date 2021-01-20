@@ -17,49 +17,55 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class IntakeSubsystem extends SubsystemBase {
-  /**
-   * Creates a new IntakeSubsystem.
-   */
+    /**
+     * Creates a new IntakeSubsystem.
+     */
 
-  private TalonSRX intakeMotor;
+    private TalonSRX intakeMotor;
 
-  private DoubleSolenoid intakeSol;
-  private Solenoid feedSol;
-  
-  public IntakeSubsystem() {
+    private DoubleSolenoid intakeSol;
+    private Solenoid feedSol;
 
-    intakeMotor = new TalonSRX(10);
+    public IntakeSubsystem() {
 
-    intakeSol = new DoubleSolenoid(3, 4);
-    feedSol = new Solenoid(1);
-  }
+        intakeMotor = new TalonSRX(10);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+        intakeSol = new DoubleSolenoid(3, 4);
+        feedSol = new Solenoid(1);
+    }
 
-  public void runIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, RobotContainer.getOperatorAxis(3)-RobotContainer.getOperatorAxis(2));
-  }
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
 
-  public void stopIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, 0);
-  }
-  public void flopIntakeOut() {
-    intakeSol.set(Value.kForward);
-  }
-  public void flopIntakeIn() {
-    intakeSol.set(Value.kReverse);
-  }
-  public void leaveIntakeNeutral() {
-    intakeSol.set(Value.kOff);
-  }
-  public void releaseBalls() {
-    feedSol.set(true);
-  }
-  public void stopBalls() {
-    feedSol.set(false);
-  }
+    public void runIntake() {
+        intakeMotor.set(ControlMode.PercentOutput,
+                RobotContainer.getOperatorAxis(3) - RobotContainer.getOperatorAxis(2));
+    }
+
+    public void stopIntake() {
+        intakeMotor.set(ControlMode.PercentOutput, 0);
+    }
+
+    public void flopIntakeOut() {
+        intakeSol.set(Value.kForward);
+    }
+
+    public void flopIntakeIn() {
+        intakeSol.set(Value.kReverse);
+    }
+
+    public void leaveIntakeNeutral() {
+        intakeSol.set(Value.kOff);
+    }
+
+    public void releaseBalls() {
+        feedSol.set(true);
+    }
+
+    public void stopBalls() {
+        feedSol.set(false);
+    }
 
 }

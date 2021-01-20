@@ -12,36 +12,37 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimbingSubsystem;
 
 public class ClimbMotorCommand extends CommandBase {
-  /**
-   * Creates a new ClimbMotorCom.
-   */
-  private ClimbingSubsystem climbingSubsystem;
-  public ClimbMotorCommand(ClimbingSubsystem climbingSubsystem) {
-    this.climbingSubsystem = climbingSubsystem;
-    addRequirements(this.climbingSubsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    /**
+     * Creates a new ClimbMotorCom.
+     */
+    private ClimbingSubsystem climbingSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    public ClimbMotorCommand(ClimbingSubsystem climbingSubsystem) {
+        this.climbingSubsystem = climbingSubsystem;
+        addRequirements(this.climbingSubsystem);
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    climbingSubsystem.runClimbMotor();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    climbingSubsystem.stopClimbMotor();
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        climbingSubsystem.runClimbMotor();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !RobotContainer.climbButtonValue();
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        climbingSubsystem.stopClimbMotor();
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return !RobotContainer.climbButtonValue();
+    }
 }

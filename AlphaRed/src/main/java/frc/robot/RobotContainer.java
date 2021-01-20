@@ -33,7 +33,7 @@ import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LauncherPIDSubsystem;
 import frc.robot.subsystems.SensorsSubsystem;
-import frc.robot.subsystems.SwerveDrivePIDSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -48,15 +48,15 @@ public class RobotContainer {
   public static final ClimbingSubsystem climbingSubsystem = new ClimbingSubsystem();
   public static final ControlPanelSubsystem controlPanelSubsystem = new ControlPanelSubsystem();
   public static final SensorsSubsystem sensorsSubsystem = new SensorsSubsystem();
-  public static final SwerveDrivePIDSubsystem swerveDrivePIDSubsystem = new SwerveDrivePIDSubsystem();
+  public static final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static final AimingSubsystem aimingSubsystem = new AimingSubsystem();
 
   private final AimingCommandDown aimingCommandDown = new AimingCommandDown(aimingSubsystem);
   private final AimingCommand aimingCommand = new AimingCommand(aimingSubsystem);
   private final LauncherCommand launcherCommand = new LauncherCommand(launcherPIDSubsystem);
-  private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(swerveDrivePIDSubsystem);
-  private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(swerveDrivePIDSubsystem);
-  private final PointTurnCommand pointTurnCommand = new PointTurnCommand(swerveDrivePIDSubsystem);
+  private final DriveSwerveCommand driveSwerveCommand = new DriveSwerveCommand(driveTrainSubsystem);
+  private final StrafeEasyModeCommand strafeEasyModeCommand = new StrafeEasyModeCommand(driveTrainSubsystem);
+  private final PointTurnCommand pointTurnCommand = new PointTurnCommand(driveTrainSubsystem);
   private final FlopIntakeInCommand flopIntakeInCommand = new FlopIntakeInCommand(intakeSubsystem);
   private final FlopIntakeOutCommand flopIntakeOutCommand = new FlopIntakeOutCommand(intakeSubsystem);
   private final HandlerBooleanCommand handlerBooleanCommand = new HandlerBooleanCommand(controlPanelSubsystem);
@@ -65,7 +65,7 @@ public class RobotContainer {
   private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
   private final ClimbMotorCommand climbMotorCommand = new ClimbMotorCommand(climbingSubsystem);
   private final DisengageStopBallSolenoid disengageStopBallSolenoid = new DisengageStopBallSolenoid(intakeSubsystem);
-  private final TargetWithLimelightCommand targetWithLimelightCommand = new TargetWithLimelightCommand(swerveDrivePIDSubsystem);
+  private final TargetWithLimelightCommand targetWithLimelightCommand = new TargetWithLimelightCommand(driveTrainSubsystem);
 
   /**
    * The Driver Joystick declaration and the button definitions associated with it.
@@ -108,7 +108,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    swerveDrivePIDSubsystem.setDefaultCommand(driveSwerveCommand);
+    driveTrainSubsystem.setDefaultCommand(driveSwerveCommand);
     intakeSubsystem.setDefaultCommand(flopIntakeInCommand);
     controlPanelSubsystem.setDefaultCommand(changeHandlerPositionCommand);
     
