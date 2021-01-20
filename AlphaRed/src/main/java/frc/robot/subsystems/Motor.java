@@ -210,11 +210,18 @@ public class Motor {
   }
 
   public void findZero() {
+    int i = 0;
     while(!proxValue()) {
-      moveMotor(Constants.fastSwerveRotationSpeed);
+      double speed = Constants.fastSwerveRotationSpeed;
+      if (encoderValue() < 0 && i == 0) {
+        speed = -speed;
+        i++;
+      }
+      moveMotor(speed);
     }
     zeroEncoder();
     swerveDatBoi(0);
+    i = 0;
   }
 
 }

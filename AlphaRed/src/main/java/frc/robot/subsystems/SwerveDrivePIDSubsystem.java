@@ -26,13 +26,16 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
   public Motor motorRL;
   public Motor motorRR;
 
+  public static double output;
+  public static double setpoint;
+
   /**
    * Creates a new SwerveDrivePIDSubsystem.
    */
   public SwerveDrivePIDSubsystem() {
     super(
         // The PIDController used by the subsystem
-        new PIDController(0.01, 0, 0));
+        new PIDController(.18, .216, 0));
 
     motorFL = new Motor(2, 12, 10, 0);
     motorFR = new Motor(4, 18, 17, 1);
@@ -48,7 +51,8 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-
+    this.setpoint = setpoint;
+    this.output = output;
     moveSwervePointTurn(output);
   }
 
@@ -169,10 +173,10 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
    */
 
   public void moveSwervePointTurn(double rightT, double leftT) {
-    motorFL.swerveDatBoi(0.833, 0.552);
-    motorFR.swerveDatBoi(-0.833, 0.552);
-    motorRL.swerveDatBoi(-0.833, 0.552);
-    motorRR.swerveDatBoi(0.833, 0.552);
+    motorFL.swerveDatBoi(0.552, 0.833);
+    motorFR.swerveDatBoi(-0.552, 0.833);
+    motorRL.swerveDatBoi(-0.552, 0.833);
+    motorRR.swerveDatBoi(0.552, 0.833);
 
     double appliedSpeed = findSpeed(rightT, leftT);
 
@@ -183,10 +187,10 @@ public class SwerveDrivePIDSubsystem extends PIDSubsystem {
   }
 
   public void moveSwervePointTurn(double appliedSpeed) {
-    motorFL.swerveDatBoi(0.833, 0.552); //TODO: Check if these need to be swapped
-    motorFR.swerveDatBoi(-0.833, 0.552);
-    motorRL.swerveDatBoi(-0.833, 0.552);
-    motorRR.swerveDatBoi(0.833, 0.552);
+    motorFL.swerveDatBoi(0.552, 0.833); //TODO: Check if these need to be swapped
+    motorFR.swerveDatBoi(-0.552, 0.833);
+    motorRL.swerveDatBoi(-0.552, 0.833);
+    motorRR.swerveDatBoi(0.552, 0.833);
 
     frontLeftDriveMotor.set(ControlMode.PercentOutput, appliedSpeed);
     frontRightDriveMotor.set(ControlMode.PercentOutput, -appliedSpeed);

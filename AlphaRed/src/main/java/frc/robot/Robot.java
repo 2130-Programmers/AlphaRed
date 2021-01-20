@@ -148,8 +148,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Y Value", RobotContainer.getDriverAxis(1));
 
     SmartDashboard.putNumber("Limelight X", RobotContainer.sensorsSubsystem.x);
+    SmartDashboard.putNumber("Setpoint", RobotContainer.sensorsSubsystem.x);
     SmartDashboard.putNumber("Limelight Y", RobotContainer.sensorsSubsystem.y);
     SmartDashboard.putNumber("LimelightArea", RobotContainer.sensorsSubsystem.area);
+
+    SmartDashboard.putNumber("Output", RobotContainer.swerveDrivePIDSubsystem.output);
+    SmartDashboard.putNumber("PID Setpoint", RobotContainer.swerveDrivePIDSubsystem.setpoint);
 
     RobotContainer.swerveDrivePIDSubsystem.invertTheMotors();
     RobotContainer.swerveDrivePIDSubsystem.zeroAllEncodersBasedOnProx();

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.SensorsSubsystem;
 import frc.robot.subsystems.SwerveDrivePIDSubsystem;
 
@@ -16,13 +17,11 @@ public class TargetWithLimelightCommand extends CommandBase {
    * Creates a new TargetWithLimelightCommand.
    */
 
-  private SensorsSubsystem sensorsSubsystem;
   private SwerveDrivePIDSubsystem swerveDrivePIDSubsystem;
 
-  public TargetWithLimelightCommand(SensorsSubsystem sensorsSubsystem, SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
+  public TargetWithLimelightCommand(SwerveDrivePIDSubsystem swerveDrivePIDSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    this.sensorsSubsystem = sensorsSubsystem;
     this.swerveDrivePIDSubsystem = swerveDrivePIDSubsystem;
     addRequirements(this.swerveDrivePIDSubsystem);
 
@@ -37,7 +36,7 @@ public class TargetWithLimelightCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveDrivePIDSubsystem.setSetpoint(sensorsSubsystem.x);
+    swerveDrivePIDSubsystem.setSetpoint(0);
     swerveDrivePIDSubsystem.enable();
     
   }

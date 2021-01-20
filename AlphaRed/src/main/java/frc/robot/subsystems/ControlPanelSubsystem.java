@@ -58,6 +58,7 @@ public class ControlPanelSubsystem extends SubsystemBase {
       moveHandlerIn();
     }
     }
+    
     public void setHandlerBoolean() {
       if(i == 0 && RobotContainer.handlerPositionValue()) {
         handlerPosition = !handlerPosition;

@@ -65,7 +65,7 @@ public class RobotContainer {
   private final ClimbSolenoidCom climbSolenoidCom = new ClimbSolenoidCom(climbingSubsystem);
   private final ClimbMotorCommand climbMotorCommand = new ClimbMotorCommand(climbingSubsystem);
   private final DisengageStopBallSolenoid disengageStopBallSolenoid = new DisengageStopBallSolenoid(intakeSubsystem);
-  private final TargetWithLimelightCommand targetWithLimelightCommand = new TargetWithLimelightCommand(sensorsSubsystem, swerveDrivePIDSubsystem);
+  private final TargetWithLimelightCommand targetWithLimelightCommand = new TargetWithLimelightCommand(swerveDrivePIDSubsystem);
 
   /**
    * The Driver Joystick declaration and the button definitions associated with it.
@@ -139,7 +139,7 @@ public class RobotContainer {
 
     disengageStopBallSoneloidButton.whenPressed(disengageStopBallSolenoid, true);
 
-    targetWithLimelightButton.whileHeld(targetWithLimelightCommand);
+    targetWithLimelightButton.whileHeld(targetWithLimelightCommand, true);
   }
 
   /**
